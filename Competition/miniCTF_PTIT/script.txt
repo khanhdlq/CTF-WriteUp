@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+#include <time.h>
+#define MAX 1000
+#define true 1
+#define false 0
+
+void vehinh(int d, int c, int dg, int cham)
+{
+    printf("*");
+    for (int i=0; i<c; i++)
+    {
+        for (int j=0; j<cham; j++)
+            printf("*");
+        printf("*");
+    }
+    printf("\n");
+    for (int j=0; j<d; j++)
+    {
+        for(int jj=0; jj<dg; jj++)
+        {
+            printf("*");
+            for (int i=0; i<c; i++)
+            {
+                for (int kk=0; kk<cham; kk++)
+                    printf(".");
+                printf("*");
+            }
+            printf("\n");
+        }
+        printf("*");
+        for (int i=0; i<c; i++)
+        {
+            for (int j=0; j<cham; j++)
+                printf("*");
+            printf("*");
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    int d,c,n,dg,cham;
+    scanf("%d", &n);
+    for (int k=0; k<n; k++)
+    {
+        scanf("%d%d%d%d", &d, &c, &dg, &cham);
+        vehinh(d, c, dg, cham);
+    }
+}

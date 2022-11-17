@@ -1,0 +1,2 @@
+#hex to text %p
+KMA{AAAAAAAA_YOU_DID_IT_EVEN_IN_64_BIT}

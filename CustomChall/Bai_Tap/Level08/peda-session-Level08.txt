@@ -1,0 +1,5 @@
+break *0x080484fc
+break *0x0804851a
+break *0x0804852a
+break *0x0804853e
+
