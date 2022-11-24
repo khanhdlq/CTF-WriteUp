@@ -1,0 +1,8 @@
+version: "3"
+services:
+  service0x2:
+    build: .
+    ports:
+      - "9991:9991"
+    expose:
+      - "9991"
