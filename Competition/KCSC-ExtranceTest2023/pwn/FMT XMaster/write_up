@@ -1,0 +1,14 @@
+De bai cho ca libc va ld-linux nen ta dung pwninit de patch file
+$file chall_patched -> day la file 64 bit -> open with ida64
+
+1.Doc ida:
+	Bai nay cho chung ta 2 so ngau nhien(v6, buf) va giau no di
+	Nhiem vu la doan dc so day(v7) va get_shell (doan tdn duoc)
+	Nhin qua thi k bof duoc nhung co ham printf(format);
+	-> fmt bug
+	Y tuong ban dau la fmt ret2main roi lai fmt cho 2 so random ve 0 sai vi dia chi cac bien bi thay doi
+	-> Dung fmt de thay doi gia tri bien v7 (do tren stack co chua dia chi v7 tai vi tri 11)
+2.Get_shell
+	hint(300point): %*10c: neu tham so thu10 la 0x20 thi se in ra man hinh 0x20 ki tu
+	-> payload =b"%*8$c%*9$c" + b"%11$n" de in ra so ki tu cua tham so thu 8(v6) va tham so thu 9(buf) va ghi vao tham so thu 11(v7)
+

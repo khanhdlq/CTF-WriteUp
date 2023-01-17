@@ -1,0 +1,9 @@
+$file cat -> day la file 64 bit -> open with ida64
+
+1.Doc ida:
+	user_name = 'KCSC_4dm1n1str4t0r'
+	passswd   = 'wh3r3_1s_th3_fl4g'
+2.OverFlow:
+	gdb thay: vi tri chua flag luu trong local - vi tri input = 200
+	ghi de 200 ki tu -> mat di ki tu (null) truoc flag
+	printf("Saving secret \"%s\"...\n", secret); se in ra ca flag do chuoi khong ket thuc bang ki tu (null)

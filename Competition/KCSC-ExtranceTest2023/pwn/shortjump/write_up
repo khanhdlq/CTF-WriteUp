@@ -1,0 +1,20 @@
+$file shortjumps -> day la file 32 bit -> open with ida
+
+1.Gdb:
+	Bai nay cho ta nhap name va Y de nhap them 'dream'	
+	Dream[50] ma cho ta nhap 140 ki tu 
+	-> Buffer OverFlow
+	O day co 2 ham jmp1 va jmp2
+	Ham jmp2 get_shell nhung  no so sanh jmp voi 1
+	-> phai ret2jmp1 do jmp1 co jmp++
+
+2.jmp1:
+	O ham jmp1 so sanh tham so voi 0xdeadbeef thi jmp++
+	-> khi bof phai truyen ca tham so dau vao dong thoi phai ret2main
+	Gdb va chay chuong trinh ta nhan ra input va $rbp cach nhau 0x78 va them 4 bytes $ebp
+	->payload = b"a"*0x7c + p32(jmp1) + p32(main) + p32(0xdeadbeef) 
+
+3.jmp2:
+	tuong tu nhu jmp1 ta chi can truyen tham so la a=0xcafebabe nhung a+b = 0x13371337
+	-> b = 0x13371337-0xcafebabe = 0xFFFFFFFF48385879
+	->payload = b"a"*0x7c + p32(jmp2) + p32(main) + p32(0xcafebabe) + p64(0xFFFFFFFF48385879) 

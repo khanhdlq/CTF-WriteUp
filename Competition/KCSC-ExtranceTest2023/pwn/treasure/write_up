@@ -1,0 +1,11 @@
+$file treasure -> day la file 64 bit -> open with ida64
+
+1.Doc ida:
+	Part 1 chung ta chay chuong trinh la co
+	->Part1: KCSC{
+	Part 2 gdb or ida deu hien ma hex (gdb hien luon string)
+	->Part2: 4_t1ny_tr34sur3
+	Part 3 mo hex-view cua ida
+	->Part3: _27651d2df78e1998}  
+2.Ghep lai:
+	KCSC{4_t1ny_tr34sur3_27651d2df78e1998} 
