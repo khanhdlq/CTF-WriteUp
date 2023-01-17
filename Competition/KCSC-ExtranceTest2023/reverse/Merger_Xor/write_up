@@ -1,0 +1,107 @@
+Brute_force từng kí tự 1. Nếu đúng kí tự tiếp theo thì sẽ có 1 kí tự hex đúng. VD hex đúng tiếp là 0xab thì sẽ chỉ có 1 cái chứa 0xa.
+Code mình chạy bên dưới
+
+#include<stdio.h>
+#include<string.h>
+
+int 
+get_first_4_bit(unsigned char target){
+	return target&0xf;
+}
+
+int
+get_later_4_bit(unsigned char target){
+	return (target>>4)&0xf;
+}
+
+void
+Flat(unsigned char *input,int len){
+	unsigned char first_4_bit,later_4_bit,block,cipher[1024];
+	for(int idx=0;idx<len;idx++){
+		first_4_bit = get_first_4_bit(input[idx]);
+		later_4_bit = get_later_4_bit(input[(idx+1)%len]);
+		// merging...
+		block = (first_4_bit << 4) + later_4_bit;
+		cipher[idx] = input[idx]^block;
+	}
+	memmove(input,cipher,len);
+}
+//0x01,0x07,0x16,0x10,0x15,0x1a,0x09,0x0b,0x17,0x0f,0x1d,0x3c,0x13,0x31
+unsigned char input[1024];
+int h=32;
+  
+int main(){
+	unsigned char result[1024];
+input[0] = 'K';
+input[1] = 'C';
+input[2] = 'S';
+input[3] = 'C';
+input[4] = '{';
+input[5] = 'h'; 
+input[6] ='t';
+input[7] ='t';
+input[8] ='p';
+input[9] ='s';
+input[10] =':';
+input[11] ='/';
+input[12] ='/';
+input[13] ='w';
+input[14] ='w';
+input[15] ='w';
+input[16] ='.';
+input[17] ='y';
+input[18] ='o';
+input[19] ='u';
+input[20] ='t';
+input[21] ='u';
+input[22] ='b';
+input[23] ='e';
+input[24] ='.';
+input[25] ='c';
+input[26] ='o';
+input[27] ='m';
+input[28] ='/';
+input[29] ='w';
+input[30] ='a';
+input[31] ='t';
+input[32] ='c';
+input[33] ='h';
+input[34] ='?';
+input[35] ='v';
+input[36] ='=';
+input[37] ='u';
+input[38] ='e';
+input[39] ='D';
+input[40] ='H';
+input[41] ='4';
+input[42] ='i';
+input[43] ='L';
+input[44] ='7';
+input[45] ='0';
+input[46] ='6';
+input[47] ='0';
+input[48] =h;
+input[49] =0;
+
+	printf("[+] FLAG: ");
+  puts(input);
+	  int len = 49;//strlen((const char*)input);
+	  Flat(input,len);
+	  Flat(input,len);
+	  Flat(input,len);
+	  Flat(input,len);
+	  Flat(input,len);
+	  printf("[+] Cipher: ");
+	  for(int i=0;i<len;i++) 
+		  printf("0x%02x,",input[i]);
+    printf("\n");
+    h++;
+    if (h==127)
+      return 1;
+    return main();
+}
+//[+] Cipher: 0x98,0x02,0xaa,0x9b,0xfe,0xdc,0x44,0x73,0xef,0x9d,0x40,0xdd,0xd8,0x05,0xc9,0xea,0x51,0xcd,0xab,0x01,0x77,0x14,0x8c,0x62,0x51,0xea,0x41,0xbe,0xae,0x33,0x23
+//,0xd9,0x9d,0xfe,0x22,0x36,0xdb,0x23,0xfa
+//,0x72,0x36,0xfd,0xb9,0xbc,0x11,0x04,0xfc,0xc8,0xdf
+
+ 

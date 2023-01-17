@@ -1,0 +1,19 @@
+File text gồm các kí tự từ 0-f 
+-> hex to text
+
+NTMzMDRlNTQ1MTMzNzQ0NjYyNmQ0ZTc2NWE0NzZjNzU1YTMxMzk0YTYzMzEzOTQ0NjIzMjM5NzM0OTUzNDU2ODY2NTEzZDNk
+
+Các kí tự từ số, chữ thường, chữ hoa
+->Base64 decode
+
+53304e5451337446626d4e765a476c755a31394a63313944623239734953456866513d3d
+
+Các kí tự từ 0-f 
+-> hex to text
+
+S0NTQ3tFbmNvZGluZ19Jc19Db29sISEhfQ==
+
+2 dấu bằng cuối thường là encode base64
+->Base64 decode
+
+KCSC{Encoding_Is_Cool!!!}

@@ -1,0 +1,15 @@
+Thuật toán xor: A xor B = C
+-> C xor A = B
+   C xor B = A
+
+c = b'>0\x0c,\x1a+:=\x100(5*,\x08*(2<=\x11!> E!\x006Q3VP"' 
+
+=> print(xor(c, flag))
+
+Ta có kết quả: b'us_oa\x14\x05\x02/\x0f\x17\n\x15\x137\x15\x17\r\x03\x02.\x1e\x01\x1fz\x1e?\tn\x0cio_'
+Hint ngay trên đề bài 'ú òa' mà key = b"??????"
+=> key = us_oaf
+
+print(xor(c, key))
+
+flag = KCSC{MONO_IS__WEITINNN_F0R_Y0U##}
