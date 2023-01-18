@@ -12,6 +12,4 @@ C:\Windows\System32\cmd.exe /min /C "set __COMPAT_LAYER=RUNASINVOKER && start ""
 với 'C:\Windows\System32\cmd.exe' là path của cmd
 '"C:\Users\This PC\Desktop\NoAdmin.exe' là path của file challenge 'NoAdmin'
 
-Dùng command sẽ hiện ra thêm 1 cửa sổ cmd nữa và ta nhập thêm 1 lần nữa thì sẽ 'run the file without administrator privilege'
-
 Trên cmd sẽ hiện ra flag nhưng chỉ hiện ra màn hình 1 lúc là mất nên mình quay màn hình và xem lại thì lấy được flag

@@ -1,0 +1,33 @@
+Đây là 1 file python mà chạy k cần dùng lệnh python
+-> bị đóng gói
+Khi search google với key: 'Extractor python excutable file' tìm được tool là file 'pyinstxtractor.py'
+
+Mở cmd và chạy command: 'python .\pyinstxtractor.py .\source.exe' để giải nén file
+
+Nhận được 1 folder mới là: 'source.exe_extracted'
+
+Trong folder này chứa nhiều file python trong đó có 1 file: 'souce.pyc' với file type là 'compiled'
+
+Dùng tool uncompyle6 (mình phải downgrade từ Python 3.10 ->  Python 3.9.14 để sử dụng uncompyle6) để uncompyle file và cho ra phần bên dưới có chứa flag
+
+# uncompyle6 version 3.9.0
+# Python bytecode version base 3.8.0 (3413)
+# Decompiled from: Python 3.9.14 (main, Dec 20 2022, 23:40:07) [MSC v.1929 64 bit (AMD64)]
+# Embedded file name: souce.py
+import os
+listFolder = os.listdir('C://')
+print(listFolder)
+for d in listFolder:
+    try:
+        os.chdir('C://' + d)
+        with open('flag.txt', 'w') as (f):
+            f.write('https://www.youtube.com/shorts/XUNKdCcRVoU')
+        os.chdir('C://')
+    except:
+        print('Wannacryyyyyy??')
+
+else:
+    os.chdir('C://Windows//Temp')
+    with open('tetdenbenmoinguoi.txt', 'w') as (f):
+        f.write('KCSC{T3t_n4y_4nh_kh0ng_th3m_d0t_ph4o_V1_ti3ng_cu0i_3m_r0n_r4_l0ng_4nh_r0i!}')
+# okay decompiling .\souce.pyc
