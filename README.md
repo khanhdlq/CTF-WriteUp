@@ -1,7 +1,2 @@
-# CTF-WriteUp
-Just upload the ctf challenge i have read and solve 
-
-
-
-
-Wait me for write up
+# CTF-WRITEUP
+Dang Le Quoc Khanh_AT18D
