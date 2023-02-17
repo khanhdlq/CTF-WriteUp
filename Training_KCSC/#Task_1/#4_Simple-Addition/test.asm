@@ -22,9 +22,19 @@ section .data
 section .text
 	global _start
 _start:
-	mov byte [str1], 0
-	mov byte [str2], 0
-	mov byte [sum], 0
+	mov word [str1], 0				;setup all value to null bytes
+	mov word [str2], 0
+	mov word [sum], 0
+	mov word [str1-8], 0
+	mov word [str2-8], 0
+	mov word [sum-8], 0
+	mov word [str1-16], 0
+	mov word [str2-16], 0
+	mov word [sum-16], 0
+	mov word [str1-24], 0
+	mov word [str2-24], 0
+	mov word [sum-24], 0
+
 	mov ecx,msg1					;msg1
 	mov edx,len1
 	call printf   
@@ -34,6 +44,7 @@ _start:
 	mov edx,33
 	call scanf
 	mov [num1], eax
+	mov [big_num], eax
 	cmp eax,31
 	ja too_big						;Bigger than 31bit then exit
 	
@@ -45,7 +56,7 @@ _start:
 	mov edx,33
 	call scanf
 	mov [num2], eax
-	mov [big_num], eax
+	
 	cmp eax,31
 	ja too_big						;Bigger than 31bit then exit
 	
@@ -53,7 +64,7 @@ _start:
 	mov ebx, [num2]
 	cmp eax, ebx		
 	
-	ja str1_big 					;Save the bigger value of len_str1 & len_str2  to big_num	
+	jb str1_big 					;Save the bigger value of len_str1 & len_str2  to big_num	
 	call addition_ok 					;Start of calculation
 
 done:
@@ -81,7 +92,7 @@ hehe:
 						
 str1_big:							;begin big_num = num2 and this make big_num = num1
 	mov byte [big_num], 0	
-	mov [big_num], eax
+	mov [big_num], ebx
 
 addition_ok:						;consider 2 numbers in the same order 
 	mov eax, str1			
@@ -103,6 +114,10 @@ con1:
 	add dl, '0'						;if [num_2+n] = null -> add '0' for the sub '0' behind
 con:			
 	sub cl, '0'
+	cmp cl, 20
+	jb above20
+	mov cl, 0
+above20:
 	sub dl, '0'
 	add cl, dl						;sum 2 value and add to cl
 	add cl, [so_nho]					;add [so_nho] to cl
@@ -155,6 +170,7 @@ exit:
 addcl: 
 	add cl, '0'
 	jmp con1
+
 
 
 
