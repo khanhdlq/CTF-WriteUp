@@ -114,7 +114,7 @@ con1:
 	add dl, '0'						;if [num_2+n] = null -> add '0' for the sub '0' behind
 con:			
 	sub cl, '0'
-	cmp cl, 20
+	cmp cl, 20						;số linh tinh cho về 0 hết :))
 	jb above20
 	mov cl, 0
 above20:
