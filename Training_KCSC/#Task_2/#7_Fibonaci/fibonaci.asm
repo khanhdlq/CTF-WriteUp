@@ -158,6 +158,7 @@ _start:
 	mov qword [value], 0x31
 	mov qword [multi], 1 					;ex: 1234 -> use to mul 4 with 1
 	mov qword [print_fibo2], 0
+	mov qword [num], 0
     	mov rcx,msg1        					;msg1
     	mov rdx,len1
     	call printf   
