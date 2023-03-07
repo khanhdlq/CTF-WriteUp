@@ -39,9 +39,9 @@ Ta cũng sẽ tìm offset tới rip bằng gdb như sau:
 
 Bởi vì địa chỉ của **return address** lớn hơn địa chỉ **biến nhập vào** 0x28 vì vậy ta chỉ việc tạo script để ghi đè saved rip thành địa chỉ hàm ret2win():
 
-![stack1.png](images/stack1.png)
+Nhưng khi đó RSP không chia hết cho 0x10 dẫn đến chương trình bị lỗi khi chạy
 
-Nhìn vào RSP không chia hết cho 0x10 nên chương trình bị lỗi khi chạy
+![stack1.png](images/stack1.png)
 
 ![sigsev.png](images/sigsev.png)
 
