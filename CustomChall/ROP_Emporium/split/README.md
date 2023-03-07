@@ -74,7 +74,7 @@ p.interactive()
 
 Chúng ta cần thêm ret vào đầu ROP_chain vì:
 
-![string.png](images/string.png)
+![ret.png](images/ret.png)
 
 # 4. Lấy flag
 
