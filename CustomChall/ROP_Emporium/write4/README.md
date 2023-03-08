@@ -23,7 +23,7 @@ Hàm pwnme()
 
 ![pwnme.png](images/pwnme.png)
 
-Có thể thấy ở đây ta không nhìn được cách hàm pwnme() hoạt động nên ta sẽ đọc mã assembly từ file binary:
+Ở đây ta không nhìn được cách hàm pwnme() hoạt động nên ta sẽ đọc mã assembly từ file binary:
 
 ![pwnme2.png](images/pwnme2.png)
 
