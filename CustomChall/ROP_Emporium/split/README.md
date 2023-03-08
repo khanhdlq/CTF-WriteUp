@@ -68,7 +68,6 @@ payload = flat(
     )
 p.sendlineafter(b">",payload)
 p.interactive()
-
 ```
 # Lưu ý:
 
