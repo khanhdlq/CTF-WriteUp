@@ -83,7 +83,7 @@ Sử dụng gdb nhập vào input với b"a"*0x50 ta được:
 
 ![gdb1.png](images/gdb1.png)
 
-Chính bởi việc các ký tự **'x', 'g', 'a', '.'** bị cấm nên ta sẽ chỉ ghi được **fl___t_t** của file flag muốn đọc nên ta sẽ tận dụng **xor    BYTE PTR [r15],r14b** của usefulGadgets() để biến đổi byte và lưu vào địa chỉ của r15.
+Chính bởi việc các ký tự **'x', 'g', 'a', '.'** bị cấm nên ta sẽ chỉ ghi được **fl___t_t** của **flag.txt** muốn đọc nên ta sẽ tận dụng **xor    BYTE PTR [r15],r14b** của usefulGadgets() để biến đổi byte và lưu vào địa chỉ của r15.
 
 ROP_chain ta sẽ làm như sau:
 
