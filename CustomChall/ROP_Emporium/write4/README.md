@@ -37,7 +37,7 @@ cũng như usefulGadgets()
 
 # 2. Ý tưởng
 
-Có thể thấy chức năng hàm usefulFunction() để in ra file nên ta sẽ lợi dụng BOF để sửa tham số **nonexistent** thành flag.txt để hàm này đọc flag file và in ra
+Có thể thấy chức năng hàm usefulFunction() để in ra file nên ta sẽ lợi dụng BOF để sửa tham số **nonexistent** thành **flag.txt** để hàm này đọc flag file và in ra
 
 # 3. Khai thác
 
