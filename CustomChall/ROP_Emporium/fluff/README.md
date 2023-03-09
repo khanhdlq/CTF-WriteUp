@@ -72,7 +72,10 @@ Sau khi chạy lệnh này giá trị tại địa chỉ bộ nhớ [rbx + AL] s
 Với lệnh bextr rbx,rcx,rdx, giá trị nguồn được trích xuất là giá trị của thanh ghi RCX. Chỉ số và độ dài bit được chỉ định bởi giá trị của thanh ghi RDX. Sau đó, giá trị kết quả của phép trích xuất bit này sẽ được đặt vào thanh ghi RBX.
 
 Hay ngắn gọn đó là RBX = RCX sau khi chạy lệnh
+
+
 Ví dụ:
+
 ![gdb1.png](images/gdb1.png)
 
 Sau khi chạy lệnh **bextr  rbx,rcx,rdx**
