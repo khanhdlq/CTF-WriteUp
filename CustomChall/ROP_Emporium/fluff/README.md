@@ -136,7 +136,7 @@ Như đã nói, lệnh này sau khi sử dụng sẽ lưu giá trị của thanh
 
 ![string.png](images/string.png)
 
-# tiếp tục lặp lại cho đến khi ghi đủ 8 ký tự "f", "l", "a", "g", ".", "t", "x", "t"
+# Tiếp tục lặp lại cho đến khi ghi đủ 8 ký tự "f", "l", "a", "g", ".", "t", "x", "t"
 
 
 Full code:
