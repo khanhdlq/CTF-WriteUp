@@ -41,11 +41,13 @@ Vậy offset là 0x28 bytes.
 
 Do bài này leak được địa chỉ nên ta sẽ dùng:
 
-```p.recvuntil(b"The Old Gods kindly bestow upon you a place to pivot: 0x")
+```
+p.recvuntil(b"The Old Gods kindly bestow upon you a place to pivot: 0x")
 
 leak = int(p.recv(12),16)
 
-print("[+]LEAK:", hex(leak))```
+print("[+]LEAK:", hex(leak))
+```
 
 để leak địa chỉ và in ra màn hình.
 
