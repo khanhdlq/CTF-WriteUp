@@ -31,6 +31,8 @@ Bài này leak cho ta địa chỉ của chuỗi đầu vào -> leak được li
 
 # 3. Khai thác
 
+Tại hàm pwnme cho chúng ta nhập vào 2 lần nhưng do leak được libc rồi nên chúng ta có thể nhập bỏ qua lần 1 và dùng kỹ thuật ret2win ở lần nhập thứ 2.
+
 Ta cũng sẽ tìm offset tới rip bằng gdb như sau:
 
 ![offset.png](images/offset.png)
@@ -68,10 +70,10 @@ elf = context.binary = ELF('./pivot', checksec=False)
 
 p = process("./pivot")
 
-gdb.attach(p, gdbscript='''
+#gdb.attach(p, gdbscript='''
 #b*pwnme+113
 #c
-''')
+#''')
 adget = elf.sym['usefulGadgets']
 
 p.recvuntil(b"The Old Gods kindly bestow upon you a place to pivot: 0x")

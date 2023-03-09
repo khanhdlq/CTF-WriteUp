@@ -7,10 +7,10 @@ elf = context.binary = ELF('./pivot', checksec=False)
 
 p = process("./pivot")
 
-gdb.attach(p, gdbscript='''
+#gdb.attach(p, gdbscript='''
 #b*pwnme+113
 #c
-''')
+#''')
 adget = elf.sym['usefulGadgets']
 
 p.recvuntil(b"The Old Gods kindly bestow upon you a place to pivot: 0x")
