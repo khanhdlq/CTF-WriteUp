@@ -25,11 +25,11 @@ Còn có hàm usefulFunction()
 
 ![usefulFunction.png](images/usefulFunction.png)
 
-Ở hàm pwnme() ta có thể thấy tại dòng thứ 8 cho phép ghi 0x60 ký tự vào biến **s** nhưng biến **s** chỉ được khai báo 0x20 bytes --> **Buffer Overflow**
+Ở hàm pwnme() ta có thể thấy tại dòng thứ 8 cho phép ghi 0x60 ký tự vào biến `s` nhưng biến `s` chỉ được khai báo 0x20 bytes --> **Buffer Overflow**
 
 # 2. Ý tưởng
 
-Có thể thấy ở bài này không có hàm win nên ta không thể sử dụng ret2win, thay vào đó là hàm **system** và có sẵn string "/bin/cat flag.txt"
+Có thể thấy ở bài này không có hàm win nên ta không thể sử dụng ret2win, thay vào đó là hàm `system` và có sẵn string "/bin/cat flag.txt"
 --> ROP_gadget
 
 # 3. Khai thác
@@ -38,7 +38,7 @@ Ta cũng sẽ tìm offset tới rip bằng gdb như sau:
 
 ![offset.png](images/offset.png)
 
-Bởi vì địa chỉ của **return address** lớn hơn địa chỉ **biến nhập vào** 0x28 vì vậy ta chỉ việc tạo script để ghi đè saved rip thành ROP_chain khi đã có hàm system và chuỗi "/bin/cat flag.txt":
+Bởi vì địa chỉ của **return address** lớn hơn địa chỉ **biến nhập vào** `0x28` vì vậy ta chỉ việc tạo script để ghi đè saved rip thành ROP_chain khi đã có hàm system và chuỗi "/bin/cat flag.txt":
 
 ![string.png](images/string.png)
 

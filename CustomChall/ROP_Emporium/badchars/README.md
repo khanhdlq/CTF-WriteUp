@@ -38,7 +38,7 @@ cũng như usefulGadgets()
 
 # 2. Ý tưởng
 
-Có thể thấy chức năng hàm usefulFunction() để in ra file nên ta sẽ lợi dụng BOF để sửa tham số **nonexistent** thành **flag.txt** để hàm này đọc flag file và in ra
+Có thể thấy chức năng hàm usefulFunction() để in ra file nên ta sẽ lợi dụng BOF để sửa tham số `nonexistent` thành `flag.txt` để hàm này đọc flag file và in ra
 
 --> ROP_chain
 
@@ -52,7 +52,7 @@ Có thể thấy ở hàm usefulFunction() sẽ lấy tham số để đọc fil
 
 ![usefulFunction2.png](images/usefulFunction2.png)
 
-Đối với usefulGadgets() có **xor    BYTE PTR [r15],r14b** dùng để thực hiện việc XOR một byte được chỉ định trong thanh ghi R14 với byte tại địa chỉ được lưu trữ trong thanh ghi R15 và được lưu trữ tại địa chỉ được chỉ định trong thanh ghi R15
+Đối với usefulGadgets() có `xor    BYTE PTR [r15],r14b` dùng để thực hiện việc XOR một byte được chỉ định trong thanh ghi R14 với byte tại địa chỉ được lưu trữ trong thanh ghi R15 và được lưu trữ tại địa chỉ được chỉ định trong thanh ghi R15
 
 ![usefulGadgets2.png](images/usefulGadgets2.png)
 
@@ -69,7 +69,7 @@ Tiếp đến kiếm đại 1 địa chỉ trống:
 
 ![strstr.png](images/strstr.png)
 
-ở đây mình sẽ lấy **0x6010f0**
+ở đây mình sẽ lấy `0x6010f0`
 
 # Quan trọng
 
@@ -77,13 +77,13 @@ Chạy thử chương trình:
 
 ![run.png](images/run.png)
 
-Như tên chương trình **badchars**, khi ta nhập vào nhưng ký tự **'x', 'g', 'a', '.'** thì khi lưu vào thanh ghi thì ký tự đó bị biến đổi
+Như tên chương trình `badchars`, khi ta nhập vào nhưng ký tự `'x', 'g', 'a', '.'` thì khi lưu vào thanh ghi thì ký tự đó bị biến đổi
 
-Sử dụng gdb nhập vào input với b"a"*0x50 ta được:
+Sử dụng gdb nhập vào input với `b"a"*0x50` ta được:
 
 ![gdb1.png](images/gdb1.png)
 
-Chính bởi việc các ký tự **'x', 'g', 'a', '.'** bị cấm nên ta sẽ chỉ ghi được **fl___t_t** của **flag.txt** muốn đọc nên ta sẽ tận dụng **xor    BYTE PTR [r15],r14b** của usefulGadgets() để biến đổi byte và lưu vào địa chỉ của r15.
+Chính bởi việc các ký tự `'x', 'g', 'a', '.'` bị cấm nên ta sẽ chỉ ghi được `fl___t_t` của `flag.txt` muốn đọc nên ta sẽ tận dụng `xor    BYTE PTR [r15],r14b` của usefulGadgets() để biến đổi byte và lưu vào địa chỉ của r15.
 
 ROP_chain ta sẽ làm như sau:
 

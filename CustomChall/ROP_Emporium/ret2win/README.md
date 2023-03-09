@@ -25,7 +25,7 @@ Và hàm ret2win()
 
 ![ret2win.png](images/ret2win.png)
 
-Ở hàm pwnme() ta có thể thấy tại dòng thứ 10 cho phép ghi 0x38 ký tự vào biến **s** nhưng biến **s** chỉ được khai báo 0x20 bytes --> **Buffer Overflow**
+Ở hàm pwnme() ta có thể thấy tại dòng thứ 10 cho phép ghi 0x38 ký tự vào biến `s` nhưng biến `s` chỉ được khai báo 0x20 bytes --> **Buffer Overflow**
 
 # 2. Ý tưởng
 
@@ -37,7 +37,7 @@ Ta cũng sẽ tìm offset tới rip bằng gdb như sau:
 
 ![offset.png](images/offset.png)
 
-Bởi vì địa chỉ của **return address** lớn hơn địa chỉ **biến nhập vào** 0x28 vì vậy ta chỉ việc tạo script để ghi đè saved rip thành địa chỉ hàm ret2win():
+Bởi vì địa chỉ của return address lớn hơn địa chỉ biến nhập vào `0x28` vì vậy ta chỉ việc tạo script để ghi đè saved rip thành địa chỉ hàm ret2win():
 
 Nhưng khi đó RSP không chia hết cho 0x10 dẫn đến chương trình bị lỗi khi chạy
 
@@ -45,7 +45,7 @@ Nhưng khi đó RSP không chia hết cho 0x10 dẫn đến chương trình bị
 
 ![sigsev.png](images/sigsev.png)
 
-Ta sẽ bỏ qua phần printf để nhảy đến **[ret2win + 14]**
+Ta sẽ bỏ qua phần printf để nhảy đến `[ret2win + 14]`
 
 ![stack2.png](images/stack2.png)
 

@@ -51,7 +51,7 @@ print("[+]LEAK:", hex(leak))
 
 để leak địa chỉ và in ra màn hình.
 
-- Dùng gdb để chạy chương trình và dùng **info functions** để xem các hàm chương trình có khi chạy ta phát hiện ra có hàm ret2win():
+- Dùng gdb để chạy chương trình và dùng `info functions` để xem các hàm chương trình có khi chạy ta phát hiện ra có hàm ret2win():
 
 ![win.png](images/win.png)
 
@@ -59,7 +59,7 @@ Ta tìm offset giữa địa chỉ leak được và địa chỉ hàm ret2win()
 
 ![offset2.png](images/offset2.png)
 
-Như vậy địa chỉ hàm ret2win() = leak + 0x1e2b71
+Như vậy địa chỉ hàm `ret2win() = leak + 0x1e2b71`
 
 Full code:
 ```

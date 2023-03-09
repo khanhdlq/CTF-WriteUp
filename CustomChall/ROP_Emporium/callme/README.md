@@ -43,7 +43,7 @@ Cũng như khi xét hàm usefulFunction():
 
 ![ROP.png](images/ROP.png)
 
-Tại usefullGadgets() có các hàm **pop** các thanh ghi **rdi,rsi,rdx** giống với tham số cho mỗi lần call **callme_one, callme_two, callme_three**
+Tại usefullGadgets() có các hàm `pop` các thanh ghi `rdi,rsi,rdx` giống với tham số cho mỗi lần call `callme_one, callme_two, callme_three`
 
 --> ROP_gadget
 
@@ -53,19 +53,22 @@ Ta cũng sẽ tìm offset tới rip bằng gdb như sau:
 
 ![offset.png](images/offset.png)
 
-Bởi vì địa chỉ của **return address** lớn hơn địa chỉ **biến nhập vào** 0x28 vì vậy ta chỉ việc tạo script để ghi đè saved rip thành ROP_chain với các tham số và call hàm như hint đề bài:
+Bởi vì địa chỉ của `return address` lớn hơn địa chỉ biến nhập vào 0x28 vì vậy ta chỉ việc tạo script để ghi đè saved rip thành ROP_chain với các tham số và call hàm như hint đề bài:
 
 ![hint.png](images/hint.png)
 
 Vậy các tham số truyền vào các hàm lần lượt là:
+```
 arg1 = 0xdeadbeefdeadbeef
 arg2 = 0xcafebabecafebabe
 arg3 = 0xd00df00dd00df00d
 
+```
+
 Và các hàm cần gọi lần lượt theo thứ tự: 
-**callme_one**
-**callme_two** 
-**callme_three**
+`callme_one`
+`callme_two`
+`callme_three`
 
 Full code:
 ```
@@ -117,7 +120,6 @@ payload = flat(
     )
 p.sendlineafter(b">",payload)
 p.interactive()
-
 
 ```
 

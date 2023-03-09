@@ -33,7 +33,7 @@ cũng như questionableGadgets()
 
 # 2. Ý tưởng
 
-Có thể thấy chức năng hàm usefulFunction() để in ra file nên ta sẽ lợi dụng BOF để sửa tham số **nonexistent** thành **flag.txt** để hàm này đọc flag file và in ra
+Có thể thấy chức năng hàm usefulFunction() để in ra file nên ta sẽ lợi dụng BOF để sửa tham số `nonexistent` thành `flag.txt` để hàm này đọc flag file và in ra
 --> ROP_chain
 
 # 3. Khai thác
@@ -48,24 +48,24 @@ Tìm 1 địa chỉ trống có quyền ghi:
 
 ![vmmap.png](images/vmmap.png)
 
-ở đây trong khoảng [0x00601000 - 0x00602000] có quyền đọc và ghi
+ở đây trong khoảng `0x00601000 - 0x00602000` có quyền đọc và ghi
 
 Tiếp đến kiếm đại 1 địa chỉ trống:
 
 ![strstr.png](images/strstr.png)
 
-ở đây mình sẽ lấy **0x6010f0**
+ở đây mình sẽ lấy `0x6010f0`
 
 # Quan trọng:
 
 Đối với questionableGadgets() có tổng cộng 3 gadgets để sử dụng:
-- xlat   BYTE PTR ds:[rbx]
+- `xlat   BYTE PTR ds:[rbx]`
 
 ![gadget1.png](images/gadget1.png)
 
 Sau khi chạy lệnh này giá trị tại địa chỉ bộ nhớ [rbx + AL] sẽ được đọc và ghi vào thanh ghi AL
 
-- bextr  rbx,rcx,rdx
+- `bextr  rbx,rcx,rdx`
 
 ![gadget2.png](images/gadget2.png)
 
@@ -78,11 +78,11 @@ Ví dụ:
 
 ![gdb1.png](images/gdb1.png)
 
-Sau khi chạy lệnh **bextr  rbx,rcx,rdx**
+Sau khi chạy lệnh `bextr  rbx,rcx,rdx`
 
 ![gdb2.png](images/gdb2.png)
 
-- xtos   BYTE PTR es:[rdi],al
+- `xtos   BYTE PTR es:[rdi],al`
 
 ![gadget3.png](images/gadget3.png)
 
@@ -96,21 +96,21 @@ Chuỗi logic để ghi từng ký tự vào địa chỉ chuỗi cần ghi "fla
 
 ![regis1.png](images/regis1.png)
 
-+ pop_rdx_rcx_addrcx
-
-+ 0x3000
-
-+ f_char-0x3ef2-0xb
+```
+pop_rdx_rcx_addrcx,
+0x3000,
+f_char-0x3ef2-0xb
+```
 
 f_char là địa chỉ chứa ký tự cần ghi là "f" và ghi vào rcx
 
 ![f_char.png](images/f_char.png)
 
-Do gadget có chứa **add    rcx,0x3ef2** nên ta sẽ giảm địa chỉ f_char đi 0x3ef2 đơn vị để sau khi cộng sẽ là địa chỉ của chữ "f"
+Do gadget có chứa `add    rcx,0x3ef2` nên ta sẽ giảm địa chỉ f_char đi `0x3ef2` đơn vị để sau khi cộng sẽ là địa chỉ của chữ "f"
 
 vì trước khi chạy lệnh này RAX có giá trị bằng 0xb nên ta sẽ giảm f_char thêm 0xb đơn vị ( điều này sẽ nói ở bước sau) 
 
--> **bextr  rbx,rcx,rdx** để lưu địa chỉ RBX = RCX
+-> `bextr  rbx,rcx,rdx` để lưu địa chỉ RBX = RCX
 
 - Bước 2:
 
@@ -118,7 +118,9 @@ vì trước khi chạy lệnh này RAX có giá trị bằng 0xb nên ta sẽ g
 
 ![regis2.png](images/regis2.png)
 
-+ xlat
+```
+xlat
+```
 
 Như đã nói ở trên, saau khi chạy lệnh này giá trị tại địa chỉ bộ nhớ [rbx + AL] sẽ được đọc và ghi vào thanh ghi AL do đó ta đã giảm f_char thêm 0xb đơn vị vì trước khi chạy lệnh này RAX = 0xb
 
@@ -128,12 +130,17 @@ Như đã nói ở trên, saau khi chạy lệnh này giá trị tại địa ch
 
 ![regis3.png](images/regis3.png)
 
-+ pop_rdi_ret
-+ null_addr + 0
+```
+pop_rdi_ret
+
+null_addr + 0
+```
 
 Đưa địa chỉ byte để ghi giá trị từ AL vào 
-	
-+ xtos 
+
+```	
+xtos 
+```
 
 Như đã nói, lệnh này sau khi sử dụng sẽ lưu giá trị của thanh ghi al vào [rdi] sau đó tăng rdi lên 1 đơn vị. Khi đó tại địa chỉ chuỗi ghi **0x6010f0** sẽ chứa ký tự "f" 
 

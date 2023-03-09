@@ -37,7 +37,7 @@ cũng như usefulGadgets()
 
 # 2. Ý tưởng
 
-Có thể thấy chức năng hàm usefulFunction() để in ra file nên ta sẽ lợi dụng BOF để sửa tham số **nonexistent** thành **flag.txt** để hàm này đọc flag file và in ra
+Có thể thấy chức năng hàm usefulFunction() để in ra file nên ta sẽ lợi dụng BOF để sửa tham số `nonexistent` thành `flag.txt` để hàm này đọc flag file và in ra
 
 # 3. Khai thác
 
@@ -48,7 +48,7 @@ Ta cũng sẽ tìm offset tới rip bằng gdb như sau:
 Có thể thấy ở hàm usefulFunction() sẽ lấy tham số để đọc file bằng thanh ghi edi --> ta sẽ truyền tham số mới cho edi tại đây
 ![usefulFunction2.png](images/usefulFunction2.png)
 
-Đối với usefulGadgets() có **mov    QWORD PTR [r14],r15** để đưa giá trị từ thanh ghi r15 vào giá trị tại địa chỉ thanh ghi r14 mà khi ta tra bảng gadget có **pop r14, r15, ret**
+Đối với usefulGadgets() có `mov    QWORD PTR [r14],r15` để đưa giá trị từ thanh ghi r15 vào giá trị tại địa chỉ thanh ghi r14 mà khi ta tra bảng gadget có `pop r14, r15, ret`
 
 ![pop_r14.png](images/pop_r14.png)
 
@@ -59,13 +59,13 @@ Tìm 1 địa chỉ trống có quyền ghi:
 
 ![vmmap.png](images/vmmap.png)
 
-ở đây trong khoảng [0x00601000 - 0x00602000] có quyền đọc và ghi
+ở đây trong khoảng `0x00601000 - 0x00602000` có quyền đọc và ghi
 
 Tiếp đến kiếm đại 1 địa chỉ trống:
 
 ![strstr.png](images/strstr.png)
 
-ở đây mình sẽ lấy **0x601140**
+ở đây mình sẽ lấy `0x601140`
 
 
 ROP_chain ta sẽ làm như sau:
