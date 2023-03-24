@@ -49,6 +49,8 @@ edit(3, 0x90, payload)
 delete(4)
 ```
 
+Do ở hàm edit có thể overflow được nên ta sẽ lợi dùng heap_overflow ở đây.
+
 Chúng ta tạo fake chunk tại chunk_3
 
 Khi đó fake chunk tại chunk 3 sẽ trông như sau:
