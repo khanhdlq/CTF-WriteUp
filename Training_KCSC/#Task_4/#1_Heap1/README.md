@@ -26,7 +26,7 @@ Sửa lại file IDA ta có hàm main():
 
 # 2. Phân tích yêu cầu
 
-Tại hàm get_flag() sẽ lấy 4 bytes giá trị đầu tiên ở địa chỉ 0x6020f0 rồi cộng thêm 8 và lưu vào RAX
+Tại hàm get_flag() sẽ lấy 8 bytes giá trị ở địa chỉ 0x6020f0 rồi cộng thêm 8 và lưu vào RAX
 
 Cuối cùng so sánh giá trị tại địa chỉ RAX đó với 0xABCDEF
 
