@@ -1,7 +1,7 @@
 from pwn import*
 
 #p = process("./oneshot_patched")
-p = remote('host3.dreamhack.games',22266)
+p = remote('host3.dreamhack.games',12812)
 #gdb.attach(p,api=True)
 
 ##########################

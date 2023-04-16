@@ -3,8 +3,8 @@ from pwn import*
 context.log_level       = "DEBUG"
 context.arch            = "amd64"
 
-#p = remote('host3.dreamhack.games', 24431)
-p = process('./hook_patched')
+p = remote('host3.dreamhack.games', 14466)
+#p = process('./hook_patched')
 #gdb.attach(p,api=True)
 
 #####################

@@ -1,7 +1,7 @@
 from pwn import *
 
 #p = process("./validator_sever")
-p = remote("host3.dreamhack.games", 10796)
+p = remote("host3.dreamhack.games", 12498)
 context.log_level       = "DEBUG"
 context.arch            = "amd64"
 main = 0x000000000040063a

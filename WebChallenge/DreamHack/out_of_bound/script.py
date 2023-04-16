@@ -1,7 +1,7 @@
 from pwn import*
 
 #sp = process("./out_of_bound")
-p = remote('host3.dreamhack.games',20329)
+p = remote('host3.dreamhack.games',22034)
 #gdb.attach(p,api=True)
 
 name = 0x804a0ac

