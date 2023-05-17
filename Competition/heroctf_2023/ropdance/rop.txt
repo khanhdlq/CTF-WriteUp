@@ -1,0 +1,69 @@
+Gadgets information
+============================================================
+0x000000000040103d : add al, 0 ; add byte ptr [rax], al ; syscall
+0x00000000004010d3 : add byte ptr [rax], al ; add byte ptr [rax], al ; mov edx, 0x1f4 ; syscall
+0x0000000000401026 : add byte ptr [rax], al ; add byte ptr [rax], al ; mov edx, 0x29 ; syscall
+0x000000000040107a : add byte ptr [rax], al ; add byte ptr [rax], al ; mov edx, 0x2c ; syscall
+0x0000000000401109 : add byte ptr [rax], al ; add byte ptr [rax], al ; mov edx, 0x31 ; syscall
+0x0000000000401062 : add byte ptr [rax], al ; add byte ptr [rax], al ; mov edx, 0x3d ; syscall
+0x000000000040110f : add byte ptr [rax], al ; add byte ptr [rdi], cl ; add eax, 0x5dec8948 ; ret
+0x00000000004010d4 : add byte ptr [rax], al ; add byte ptr [rdx + 0x1f4], bh ; syscall
+0x0000000000401027 : add byte ptr [rax], al ; add byte ptr [rdx + 0x29], bh ; syscall
+0x000000000040107b : add byte ptr [rax], al ; add byte ptr [rdx + 0x2c], bh ; syscall
+0x000000000040110a : add byte ptr [rax], al ; add byte ptr [rdx + 0x31], bh ; syscall
+0x0000000000401063 : add byte ptr [rax], al ; add byte ptr [rdx + 0x3d], bh ; syscall
+0x0000000000401070 : add byte ptr [rax], al ; jmp 0x401085
+0x00000000004010d5 : add byte ptr [rax], al ; mov edx, 0x1f4 ; syscall
+0x0000000000401028 : add byte ptr [rax], al ; mov edx, 0x29 ; syscall
+0x000000000040107c : add byte ptr [rax], al ; mov edx, 0x2c ; syscall
+0x000000000040110b : add byte ptr [rax], al ; mov edx, 0x31 ; syscall
+0x0000000000401064 : add byte ptr [rax], al ; mov edx, 0x3d ; syscall
+0x000000000040102d : add byte ptr [rax], al ; syscall
+0x0000000000401111 : add byte ptr [rdi], cl ; add eax, 0x5dec8948 ; ret
+0x00000000004010d6 : add byte ptr [rdx + 0x1f4], bh ; syscall
+0x0000000000401029 : add byte ptr [rdx + 0x29], bh ; syscall
+0x000000000040107d : add byte ptr [rdx + 0x2c], bh ; syscall
+0x000000000040110c : add byte ptr [rdx + 0x31], bh ; syscall
+0x0000000000401065 : add byte ptr [rdx + 0x3d], bh ; syscall
+0x0000000000401113 : add eax, 0x5dec8948 ; ret
+0x0000000000401088 : cmp al, 0 ; add byte ptr [rax], al ; syscall
+0x0000000000401008 : cmp al, 0x40 ; je 0x401011 ; inc rdi ; jmp 0x401002
+0x0000000000401038 : dec dword ptr [rax - 0x77] ; out 0xba, al ; add al, 0 ; add byte ptr [rax], al ; syscall
+0x0000000000401116 : in al, dx ; pop rbp ; ret
+0x0000000000401013 : inc al ; ret
+0x000000000040100d : inc edi ; jmp 0x401002
+0x000000000040100c : inc rdi ; jmp 0x401002
+0x0000000000401010 : int1 ; xor eax, eax ; inc al ; ret
+0x000000000040100a : je 0x401011 ; inc rdi ; jmp 0x401002
+0x0000000000401006 : je 0x401015 ; cmp al, 0x40 ; je 0x401011 ; inc rdi ; jmp 0x401002
+0x000000000040100f : jmp 0x401002
+0x0000000000401072 : jmp 0x401085
+0x00000000004010f9 : jmp 0x401114
+0x0000000000401087 : mov eax, 0x3c ; syscall
+0x00000000004010d7 : mov edx, 0x1f4 ; syscall
+0x000000000040102a : mov edx, 0x29 ; syscall
+0x000000000040107e : mov edx, 0x2c ; syscall
+0x000000000040110d : mov edx, 0x31 ; syscall
+0x0000000000401066 : mov edx, 0x3d ; syscall
+0x000000000040109d : mov edx, 0x64 ; syscall
+0x000000000040103c : mov edx, 4 ; syscall
+0x000000000040109b : mov esi, esp ; mov edx, 0x64 ; syscall
+0x000000000040103a : mov esi, esp ; mov edx, 4 ; syscall
+0x0000000000401115 : mov esp, ebp ; pop rbp ; ret
+0x000000000040109a : mov rsi, rsp ; mov edx, 0x64 ; syscall
+0x0000000000401039 : mov rsi, rsp ; mov edx, 4 ; syscall
+0x0000000000401114 : mov rsp, rbp ; pop rbp ; ret
+0x0000000000401007 : or eax, 0x574403c ; inc rdi ; jmp 0x401002
+0x000000000040103b : out 0xba, al ; add al, 0 ; add byte ptr [rax], al ; syscall
+0x0000000000401117 : pop rbp ; ret
+0x0000000000401015 : ret
+0x0000000000401012 : sar dh, 0xc0 ; ret
+0x000000000040106e : sbb al, 0 ; add byte ptr [rax], al ; jmp 0x401085
+0x000000000040107f : sub al, 0 ; add byte ptr [rax], al ; syscall
+0x000000000040102b : sub dword ptr [rax], eax ; add byte ptr [rax], al ; syscall
+0x000000000040102f : syscall
+0x000000000040110e : xor dword ptr [rax], eax ; add byte ptr [rax], al ; syscall
+0x0000000000401011 : xor eax, eax ; inc al ; ret
+0x0000000000401085 : xor edi, edi ; mov eax, 0x3c ; syscall
+
+Unique gadgets found: 65
