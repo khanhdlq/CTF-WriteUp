@@ -11,7 +11,7 @@ if local:
     p = process("./main")
     #gdb.attach(p,'''''')
 else:
-    p = remote('198.199.90.158', 32983)
+    p = remote('198.199.90.158', 34762)
 
 elf = context.binary = ELF('./main', checksec=False)
 p.recvuntil(b"math!")
