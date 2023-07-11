@@ -40,7 +40,7 @@ Ok vậy ở đây làm sao để 2 chuỗi khác nhau có cùng 1 md5_hash?
 
 search thì ta có https://crypto.stackexchange.com/questions/1434/are-there-two-known-strings-which-have-the-same-md5-hash-value
 
-``
+```
 > md5sum message1.bin message2.bin
 > 008ee33a9d58b51cfeb425b0959121c9 message1.bin
 > 008ee33a9d58b51cfeb425b0959121c9 message2.bin
