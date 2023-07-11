@@ -20,7 +20,8 @@
             echo 'Username and password are wrong';
         }
     }
-?>```
+?>
+```
 
 Đoạn mã php trên cho ta nhập username và password với điều kiện phải khác nhau
 
