@@ -13,7 +13,7 @@ SELECT * FROM products WHERE category = 'Gifts' AND released = 1
 
 Nhìn trên url thì đúng là nó sẽ lấy tên của 1 danh mục sản phẩm rồi hiện thông tin lên cho ta xem
 
-[web.png](images/web.png)
+![web.png](images/web.png)
 
 # 2. Exploit
 
@@ -37,5 +37,5 @@ GET /filter?category=Gifts'+or+1=1-- HTTP/2
 
 Và trang web đã hiện lên tất cả những sản phẩm có trong `products`
 
-[solved.png](images/solved.png)
+![solved.png](images/solved.png)
 
