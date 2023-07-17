@@ -1,6 +1,6 @@
 # SQL injection vulnerability in WHERE clause allowing retrieval of hidden data
 
-# 1: Vulnerable
+# 1. Vulnerable
 
 Hint:
 - This lab contains a `SQL injection` vulnerability in the `product category filter`. When the user selects a category, the application carries out a `SQL query` like the following:
@@ -15,7 +15,7 @@ Nhìn trên url thì đúng là nó sẽ lấy tên của 1 danh mục sản ph�
 
 [web.png](images/web.png)
 
-# 1: Vulnerable
+# 2. Exploit
 
 Vậy nếu ta sử dụng câu lệnh or thì sao nhỉ
 
