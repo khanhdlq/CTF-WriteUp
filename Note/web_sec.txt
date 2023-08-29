@@ -1,0 +1,37 @@
+[+] RUN_WEB:
+	- sudo service nginx start
+	- /var/www/html/
+
+=======================================
+
+[+] CHECK_FRAMEWORK:
+	- kali@kali$ curl https://static-labs.tryhackme.cloud/sites/favicon/images/favicon.ico | md5sum
+	- https://wiki.owasp.org/index.php/OWASP_favicon_database
+
+=======================================
+
+[+] HIDDEN_DATA:
+	- Breakpoint
+	- Network
+	- robots.txt
+	- sitemap.xml
+
+=======================================
+
+[+] XSS:
+	- innerHTML: Chèn giá trị trực tiếp vào code web
+	- h2:contains(): có thể inject xss
+	- javascript:alert(1) -> xss link
+	- Send web to victim <iframe src="https://0aac00ae043e2f97810b39dd001b00f8.web-security-academy.net/#" onload="this.src+='<img src=1 onerror=alert(1)>'">
+
+=======================================
+
+[+] Authentication:
+
+	- X-Forwarded-For: <client>, <proxy1>, <proxy2> 
+	+ Header "X-Forwarded-For" là một phần của giao thức HTTP mà khi gửi một yêu cầu từ một máy tính đến một máy chủ web thông qua các máy chủ trung gian, nó giúp xác định địa chỉ IP của các máy tính trung gian đó. Điều này quan trọng trong việc theo dõi quá trình truyền tải yêu cầu qua các máy chủ ấy.
+	+ <client>: The client IP address
+	+ <proxy1>, <proxy2>: If a request goes through multiple proxies, the IP addresses of each successive proxy is listed. This means that, given well-behaved client and proxies, the rightmost IP address is the IP address of the most recent proxy and the leftmost IP address is the IP address of the originating client.
+
+	- X-Forwarded-Host: attacker.link: Sử dụng để máy chủ có thể biết máy khách muốn giao tiếp với ai
+
