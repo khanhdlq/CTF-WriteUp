@@ -11,7 +11,7 @@ run docker:
 	[-] sudo docker-compose up
 	[-] sudo docker ps
 	[-] docker exec -it <container_id> sh
-	
+	    docker run -p 2007:2007 <images_id>
 	copy file from libc: docker cp <container-id>:/lib/libc.so.6 <local-destination>
 
 ====================================================================================================================================================================================
