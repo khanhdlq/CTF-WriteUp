@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define the encoded message as a byte array
+
+
+int main() {
+    
+    for (int k=0x00; k<=0xff;k++){
+    unsigned char encoded_message[] = {
+    0x0F, 0x10, 0x1C, 0x0B, 0x19, 0x04, 0x0A, 0x08,
+    0x0C, 0x0F, 0x20, 0x14, 0x4E, 0x11, 0x46, 0x20,
+    0x14, 0x4F, 0x11, 0x46, 0x20, 0x46, 0x4F, 0x48,
+    0x20, 0x11, 0x4F, 0x48, 0x17, 0x4E, 0x11, 0x46,
+    0x20, 0x4F, 0x11, 0x20, 0x12, 0x4C, 0x02, 0x00
+    };
+    // Calculate the length of the encoded message
+    int length = 0;
+    while (encoded_message[length] != 0) {
+        length++;
+    }
+
+    // Decode the message
+    for (int i = 0; i < length; i++) {
+        encoded_message[i] ^= k; // Replace 0x42 with the appropriate value for decoding
+    }
+
+    // Print the decoded message
+    printf("%s", (char *)encoded_message);
+}
+}
