@@ -134,7 +134,9 @@
 [+] LFI:
 	- local file include - include file để dùng làm mẫu cho trang web
 	- ../../../etc/passwd%00.png
-	- link to shell.
+	
+[+] RFI:
+	-
 
 =======================================
 
