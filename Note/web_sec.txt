@@ -150,4 +150,5 @@
 =======================================
 
 [+] JWT:
+	- decode() thay vì verify()
 	- "alg":"none" (không hash bằng thuật toán nào cả) -> xóa signature nhưng để lại dấu . 
