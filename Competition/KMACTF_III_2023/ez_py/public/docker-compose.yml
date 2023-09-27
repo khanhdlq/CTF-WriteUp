@@ -1,0 +1,9 @@
+version: '3.0'
+services:
+  babypython:
+    build: ./
+    ports:
+      - 1337:1337
+    restart: unless-stopped
+    environment:
+      - SECRET_KEY=FAKE_SECRET_KEY

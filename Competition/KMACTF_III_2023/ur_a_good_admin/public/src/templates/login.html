@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+</head>
+<body>
+    <section class="hero is-primary is-fullheight">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns is-centered">
+              <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                <form action="/login" method="POST" class="box">
+                  <div class="field">
+                    <label for="" class="label">Username</label>
+                    <div class="control has-icons-left">
+                      <input type="username" placeholder="e.g. admin" class="input" required>
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-envelope"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="" class="label">Password</label>
+                    <div class="control has-icons-left">
+                      <input type="password" placeholder="*******" class="input" required>
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <button class="button is-success">
+                      Login
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        let req = await fetch('/file?f=kmactf.jpg')
+        let res = await req.text()
+        let img = `data:image/png;base64, ${res}`
+        document.querySelector('section').style.background = `url('${img}')`
+    })
+</script>
+</html>

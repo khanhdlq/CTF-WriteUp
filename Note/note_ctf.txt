@@ -5,6 +5,7 @@ README.md:
 
 run docker:
 	[-] docker build -t image_name .
+	$ docker run -p 9090:9000 local2
 	[-] docker run --privileged image_name
 	[-] docker run -d --name Dockerfile image_name
 	

@@ -1,7 +1,7 @@
-[+] Leo_root:
+	[+] Leo_root:
 	- https://gtfobins.github.io/
 	- sudo cmd
-
+	- as + /root/root.txt
 =======================================
 
 [+] Tools:
@@ -146,3 +146,8 @@
 	
 	- end with: &x= (bỏ phần sau)
 	-169.254.169.254 contain data in cloud environment
+
+=======================================
+
+[+] JWT:
+	- "alg":"none" (không hash bằng thuật toán nào cả) -> xóa signature nhưng để lại dấu . 
