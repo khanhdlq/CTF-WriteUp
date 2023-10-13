@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Quotes Blog™ - Profile</title>
+        <link rel="icon" href="/static/images/favicon.png" />
+        <link rel="stylesheet" type="text/css" href="/static/css/nes-core.min.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/main.css" />
+    </head>
+    <body>
+        <div class="parent-container">
+            <div class="sidebar">
+                <img class="main-logo" src="/static/images/logo.png" />
+                <p class="title-p">Quotes Blog™<br /></p>
+                <ul class="nav-bar">
+                    <li><a href="/feed" class="is-primary nav-li">Feed</a></li>
+                    <li><a href="#" class="is-primary nav-li">Your Submissions</a></li>
+                    <li><a href="/logout" class="is-primary nav-li">Logout</a></li>
+                </ul>
+            </div>
+            <div class="main-area">
+                <dir class="nes-container history-feed">
+                    <p class="title">Your Submissions</p>
+                    {% if not posts|length %}
+                    <p>( ‘◇’)? It's lonely down here, your submissions will be listed here...</p>
+                    {% endif %}
+                </dir>
+                {% for post in posts %}
+                <div class="post-arrangement">
+                    <div class="vote-icons">
+                        <p><span>▲</span><span>▼</span></p>
+                    </div>
+                    <div class="nes-container is-post with-title">
+                        <p class="title">
+                            <span>{{ post.author }}</span>
+                        </p>
+                        <p>{{ post.content|safe }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <script type="text/javascript" src="/static/js/jquery-3.6.0.slim.min.js"></script>
+    </body>
+</html>

