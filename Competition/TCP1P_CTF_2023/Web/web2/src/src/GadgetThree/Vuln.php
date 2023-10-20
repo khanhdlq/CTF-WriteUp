@@ -1,5 +1,4 @@
 <?php
-
 namespace GadgetThree {
     class Vuln
     {
@@ -22,3 +21,4 @@ namespace GadgetThree {
         }
     }
 }
+?>
