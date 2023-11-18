@@ -1,0 +1,9 @@
+version: "3.3"
+services:
+    ehc_calculator_network:
+        restart: always
+        build: .
+        image: ehc_calculator_network
+        ports:
+            - "8028:3000"
+        user: "1000:1000"

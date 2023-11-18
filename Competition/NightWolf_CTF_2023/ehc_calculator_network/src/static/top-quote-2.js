@@ -1,0 +1,18 @@
+class quote2{
+    constructor(){
+    }
+
+    all(){
+        return {
+            "Ngô Bá Khá": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROKacAtwDaMGIFRVwgCHLC3soqrqzwwaOyWQ&usqp=CAU","Ôi bạn ơi! Bạn sức đề kháng kém là do bạn không chơi đồ đấy bạn ạ, nếu bạn chơi đồ vào thì là đề kháng nó khỏe nó không bao giờ bị ốm đâu bạn ạ, chơi đồ là thuốc bổ mà bạn! Bạn phải nên nhớ nhá, cái viên thuốc bình thường, cái viên thuốc ACID B1 bạn mua có 2 nghìn đc mấy viên đúng k ? Hoặc là 10 nghìn 1 viên, 10 nghìn 1 viên là ACID B1 đấy , đúng không? Thế đây những viên thuốc như viên thuốc kẹo, viên thuốc kim cương, viên thuốc vương liệm này, viên thuốc các kiểu lày thì bạn mua cái đấy vào 500 nghìn 1 viên cơ mà! Chơi cái đấy vào đề kháng nó phải cao hơn chứ bạn! Chơi cái đấy vào nhiều đề kháng mà! Bạn không chơi vào đề kháng bạn kém là phải đấy bạn ạ"],
+            "Huấn Hoa Hồng": ["https://kenhtamly.net/uploads/dongtoico/huanhoahong/tieusuhuanhoahong1.png","Ra xã hội làm ăn bươn chải, liều thì ăn nhiều, không liều thì ăn ít. Muốn thành công thì phải chấp nhận trải qua đắng cay ngọt bùi. Làm ăn muốn kiếm được tiền phải chấp nhận mạo hiểm nguy hiểm một tí nhưng trong tầm kiểm soát. Xã hội này chỉ có làm, chịu khó, cần cù thì bù siêng năng, chỉ có làm thì mới có ăn, những cái loại không làm mà đòi có ăn thì ăn database ăn code! Thế cho nó dễ! Xã hội này không làm thì chỉ có ăn code thôi. Nói thế cho nó nhanh, cho nó dễ hiểu. Còn xã hội này sống muốn người ta tôn trọng, mình phải tôn trọng người khác trước, muốn người ta quý mình, mình phải quý người ta trước. Những người cho mình vay tiền lúc mình khó khăn, lúc mình khổ, lúc mình vỡ nợ, không phải là người ta ngu, không phải là người ta dại, mà chính vì những người đó mình phải nên tôn trọng, bởi vì những người đó coi mình là anh em bạn bè thì lúc mình vỡ nợ, khó khăn, khổ mới đưa tiền cho mình vay. Những người có tiền không phải người ta ngu đâu, không phải người ta thừa tiền đâu, người ta coi trọng mình hơn tiền bạc, người ta mới giúp lúc mình khó khăn, khổ. Còn anh em bạn bè chơi với nhau, có ăn thì tìm đến, có loz thì tìm đi. Những cái loại đấy là anh em mà ăn anh ối dồi ôi nhá. Đúng rồi anh em ạ. Cuộc đời là như thế mà. Cuộc sống thì không giống cuộc đời. Các bạn sống ở xã hội không ai biết trước ngày mai ai hơn ai. Giàu có số, nghèo có số. Nên đừng có ghen ghét đố kỵ, đừng có khinh thường người khác. Những người khinh thường người khác chính là tự khinh thường bản thân mình. Những người chơi với mình mà đi nói xấu người khác chính là tự nói xấu mình. Mình đừng có chơi với những loại, thể loại đấy. Họ đã đi nói xấu người khác trước mắt mình thì sớm hay muộn người ta cũng đi nói xấu mình trước mặt người khác. Những cái loại đấy các bạn đừng có nên chơi."],
+            "Đầu Cắt Moi": ["https://s.memehay.com/files/posts/20200906/dau-cat-moi-gian-do-nguoi-mat-day-dau-hoi-54840e9f0ec8be34abcb72c8de9b5790.jpg","Mày thấy bố mày giẻ rách à, mày thấy bố mày không đeo vàng à? Mày gọi tất cả các bạn mày ra đây xem nào. Bố mày ở khu 2 Hoàng Cương Thanh Ba Phú Thọ nhá. Cho bố mày cái địa chỉ! Đm mày nói ít thôi!"],
+            "Gia Tùng": ["https://s.memehay.com/files/posts/20200902/ohhh-tung-bung-no-tac-gia-cau-noi-vai-lon-luon-dau-cat-moi-5207836be391922f0fbba28c3060b05b.jpg","Ối dồi ôi, áo Eo Vì đầu cắt moi chất vãi loz luôn. Đợi tao xỉa cái răng đã rồi nói chuyện tiếp."]
+        }
+    }
+
+}
+
+let instance = new quote2()
+exports.default = instance;
+module.exports = exports['default'];

