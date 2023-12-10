@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render Board</title>
+    <link rel="stylesheet" href="/css/login.css"/>
+</head>
+<body>
+    <div class="background">
+        <h2>Find ID</h2>
+        <form id="findIdForm">
+            <p><input class="login" type="text" name="email_id" placeholder="email"></p>
+            <p><input class="btn" type="submit" value="find"></p>
+        </form>
+        <div id="result">
+
+        </div>
+        <a href="/auth/login">Login</a>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const findIdForm = document.getElementById('findIdForm');
+            const resultDiv = document.getElementById('result');
+            
+            findIdForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                
+                const formData = new FormData(findIdForm);
+                const formDataObject = {};
+                formData.forEach((value, key) => {
+                    formDataObject[key] = value;
+                });
+
+                const response = await fetch('/auth/findid_process', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formDataObject)
+                });
+                
+                const responseData = await response.json();
+                if (responseData.error) {
+                    resultDiv.innerHTML = `Not Found ID !`;
+                } else {
+                    resultDiv.innerHTML = `Find ID : ${responseData.id}`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

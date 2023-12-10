@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render Board</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+    <div class="background">
+        <p><%= authCheck.statusUI %></p>
+        <hr>
+        <h2>Board Page</h2>
+        <a href="/main/admin_notice/write">admin notice</a>
+        <hr>
+        <table class="board-table">
+            <thead>
+                <tr>
+                    <th class="no-column">No</th>
+                    <th>Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% boards.forEach((board) => { %>
+                    <tr>
+                      <td class="no-column"><%= board.no %></td>
+                      <td><a href="/main/admin_notice/detail?no=<%= board.no %>"><%= board.title %></a></td>
+                    </tr>
+                  <% }); %>
+            </tbody>
+        </table>
+        <div class="pagination">
+            <% if (currentPage > 1) { %>
+                <a href="/main/admin_notice?page=<%= currentPage - 1 %>">&laquo; Prev</a>
+            <% } %>
+        
+            <% for(let i = 1; i <= totalPage; i++) { %>
+                <% if (i === currentPage) { %>
+                    <span class="active-page"><%= i %></span>
+                <% } else { %>
+                    <a href="/main/admin_notice?page=<%= i %>"><%= i %></a>
+                <% } %>
+            <% } %>
+        
+            <% if (currentPage < totalPage) { %>
+                <a href="/main/admin_notice?page=<%= currentPage + 1 %>">Next &raquo;</a>
+            <% } %>
+        </div>
+
+        <a href="/main">main</a>
+    </div>
+</body>
+</html>

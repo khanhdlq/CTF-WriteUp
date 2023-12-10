@@ -1,0 +1,153 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #501A9B;
+    margin: 50px;
+
+}
+
+.background {
+    background-color: white;
+    height: auto;
+    width: 90%;
+    max-width: 500px;
+    padding: 10px;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0px 40px 30px -20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.logout-btn {
+    display: inline-block;
+    margin-left: 10px;
+    background-color: #501A9B; /* Red background */
+    color: white; /* White text */
+    padding: 5px 10px;  /* Reduced padding */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none; /* Removes underline */
+}
+
+.logout-btn:hover {
+    background-color: #501A9B; /* Darker red on hover */
+}
+
+.btn {            
+    border: none;
+    width: 75%;
+    background-color: #501A9B;
+    color: white;
+    padding: 15px 0;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .2s;
+}
+.btn1 {            
+    border: none;
+    width: 75%;
+    background-color: #501A9B;
+    color: white;
+    padding: 10px 0;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+
+.btn:hover {
+    background-color: #501A9B;
+}
+
+.board-item {
+    background-color: #f7f7f9; /* 게시글 배경색 */
+    margin: 20px 0; /* 게시글 간의 여백 */
+    padding: 15px;  /* 게시글 내부 여백 */
+    border: 1px solid #e0e0e2; /* 게시글 테두리 */
+    border-radius: 5px; /* 테두리 둥글게 */
+    text-align: left; /* 제목 및 내용 왼쪽 정렬 */
+    transition: 0.3s; /* 호버 효과를 위한 전환 시간 */
+}
+
+.board-item1 {
+    margin: 5px 0;        /* 상하 마진 설정 */
+    padding: 8px;         /* 내부 패딩 설정 */
+    text-align: left;     /* 텍스트 왼쪽 정렬 */
+}
+
+.board-item:hover {
+    background-color: #f1f1f3; /* 마우스 오버 시 게시글 배경색 변경 */
+    box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.2); /* 마우스 오버 시 그림자 효과 */
+}
+
+.board-item h3 {
+    font-size: 1.5em; /* 제목의 폰트 크기 */
+    margin-bottom: 10px; /* 제목 아래 여백 */
+    color: #501A9B; /* 제목 색상 */
+}
+
+.board-item p {
+    font-size: 1em; /* 본문 폰트 크기 */
+    margin: 0; /* 본문의 기본 여백 제거 */
+}
+
+
+/* Table Styles */
+table {
+    width: 100%;  /* 테이블의 너비 설정 */
+    border-collapse: collapse;  /* 테이블 내부 경계선 결합 */
+    margin: 15px 0;  /* 상하 마진 설정 */
+}
+
+th, td {
+    padding: 8px 12px;  /* 셀 내부 패딩 설정 */
+    border-bottom: 1px solid #D1D1D4;  /* 셀 하단 경계선 설정 */
+}
+
+th {
+    background-color: #f2f2f2;  /* 헤더 셀의 배경색 설정 */
+    height: 10px;
+
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #501A9B;
+    margin-bottom: 20px;  /* h2와 테이블 사이의 여백을 조절하세요. */
+}
+
+.post-detail {
+    width: 100%;  
+    border-collapse: collapse;  
+}
+
+.post-detail th, .post-detail td {
+    border: 1px solid #D1D1D4;
+    padding: 10px;
+    text-align: left;   /* 왼쪽 정렬을 위한 스타일입니다. */
+}
+
+.post-detail th {
+    width: 100px;   /* Title의 너비를 100px로 고정 */
+    border: 1px solid #D1D1D4;
+    padding: 10px 5px;
+    text-align: left;
+}
+
+.post-detail td {
+    /* Content의 너비는 테이블의 전체 너비에서 Title의 너비를 뺀 나머지 */
+    border: 1px solid #D1D1D4;
+    padding: 10px 5px;
+    text-align: left;
+    overflow: hidden;    /* 내용이 너무 긴 경우 숨김 */
+    text-overflow: ellipsis;  /* 너무 긴 내용을 ...으로 표시 */
+    white-space: nowrap;  /* 내용을 한 줄로 표시 */
+}
+
+.post-detail td a:hover {
+    color: #6A679E;       
+}

@@ -1,0 +1,28 @@
+version: '3'
+services:
+  node-app:
+    image: node
+    restart: always
+    container_name: render_board
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "22223:22223"
+    links:
+      - db 
+  db:
+    image: mysql:5.5
+    container_name: db
+    volumes:
+      - "./create.sql:/docker-entrypoint-initdb.d/init.sql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "1324"
+      MYSQL_DATABASE: "acs_data"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "1324"
+    ports:
+      - "3307:3306" 
+    expose:
+      - 3307

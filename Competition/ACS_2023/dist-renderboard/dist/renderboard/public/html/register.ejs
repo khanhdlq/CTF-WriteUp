@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render Board</title>
+    <link rel="stylesheet" href="/css/login.css"/>
+</head>
+<body>
+    <div class="background">
+        <h2>Register</h2>
+        <form action="/auth/register_process" method="post" id="registrationForm">
+            <p><input class="login" type="text" name="username" id="username" placeholder="ID"></p>
+            <p><input class="login" type="password" name="pwd" placeholder="PW"></p>    
+            <p><input class="login" type="password" name="pwd2" placeholder="Check PW"></p>    
+            <p><input class="login" type="email" name="email" placeholder="Email"></p>
+            <p><button class="btn" type="button" id="checkDuplicate">ID Check</button></p>
+            <p><span id="duplicateStatus"></span></p>
+            <p><input class="btn" type="submit" value="Submit" id="submitButton" disabled></p>
+        </form> 
+
+
+
+    
+        <p><a href="/auth/login">Login</a></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkDuplicateBtn = document.getElementById('checkDuplicate');
+            const duplicateStatus = document.getElementById('duplicateStatus');
+            const registrationForm = document.getElementById('registrationForm');
+            const submitButton = document.getElementById('submitButton');
+
+            checkDuplicateBtn.addEventListener('click', function() {
+                const username = registrationForm.querySelector('#username').value;
+                console.log(username)
+                if (username) {
+                    fetch('/auth/check_duplicate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ username }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const message = data.available
+                            ? username + ' is available ID'
+                            : username + ' is already exists'
+
+                        duplicateStatus.textContent = message;
+
+                        submitButton.disabled = !data.available;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
