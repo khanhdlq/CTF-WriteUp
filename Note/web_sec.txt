@@ -4,7 +4,8 @@
 	- as + /root/root.txt
 =======================================
 service ssh start
-ssh -i /home/kali/Desktop/public_key -p 2214 root@192.168.18.170
+docker exec -it --privileged c6e8cce37ec9 /bin/bash
+ssh -i [ssh_key] -p [ssh port] root@[ip]
 
 [+] Tools:
 	- enum4linux -a <MACHINE IP>: kiếm username

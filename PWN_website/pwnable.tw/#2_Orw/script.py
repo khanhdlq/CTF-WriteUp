@@ -12,7 +12,7 @@ if local:
         c
     ''')
 else:
-    p = remote('chall.pwnable.tw', 10001)
+    p = remote('192.168.47.128', 909)
 
 elf = context.binary = ELF('./orw', checksec=False)
 

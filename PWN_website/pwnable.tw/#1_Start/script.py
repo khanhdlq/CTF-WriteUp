@@ -9,7 +9,8 @@ if local:
     p = process("./start")
     #p = elf.debug(gdbscript='''''')
 else:
-    p = remote('chall.pwnable.tw', 10000)
+    #p = remote('chall.pwnable.tw', 10000)
+    p = remote('103.179.184.83', 10000)
 
 elf = context.binary = ELF('./start', checksec=False)
 
